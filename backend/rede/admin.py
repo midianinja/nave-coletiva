@@ -1,3 +1,6 @@
 from django.contrib import admin
 
-# Register your models here.
+from rede.models import Rede, Pessoa
+
+admin.site.register(Rede)
+admin.site.register(Pessoa)

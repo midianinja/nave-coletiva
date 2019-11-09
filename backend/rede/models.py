@@ -1,9 +1,12 @@
 from django.db import models
 
+from utils.models import ModeloComNome
 
-class Rede(models.Model):
+
+class Rede(ModeloComNome):
     nome = models.CharField(max_length=32)
 
 
-class Pessoa(models.Model):
+class Pessoa(ModeloComNome):
     nome = models.CharField(max_length=255)
+    redes = models.ManyToManyField(Rede)

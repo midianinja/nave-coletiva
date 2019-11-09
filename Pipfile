@@ -18,6 +18,8 @@ celery = "*"
 psycopg2 = "*"
 requests = "*"
 uwsgi = "*"
+django-nested-admin = "*"
+django-mptt = "*"
 
 [requires]
 python_version = "3.7"

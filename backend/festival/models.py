@@ -1,32 +1,40 @@
 from django.db import models
+from mptt.models import MPTTModel, TreeForeignKey
 
 from nave.models import Espaco
 from rede.models import Pessoa, Rede
 
-class Festival(models.Model):
+from utils.models import ModeloComNome
+
+class Festival(ModeloComNome):
     inicio = models.DateField()
     fim = models.DateField()
     nome = models.CharField(max_length=255)
 
+    class Meta:
+        verbose_name_plural = 'Festivais'
 
-class Encontro(models.Model):
+class Encontro(ModeloComNome):
     festival = models.ForeignKey(Festival,
                                  on_delete=models.CASCADE)
+    nome = models.CharField(max_length=255)
+    descricao = models.TextField()
 
 
-class Categoria(models.Model):
-    nome = models.CharField(max_length=32)
+class Categoria(MPTTModel):
+    nome = models.CharField(max_length=32,
+                            db_index=True)
+    parent = TreeForeignKey('self',
+                            on_delete=models.CASCADE,
+                            null=True,
+                            blank=True,
+                            related_name='children')
 
+    def __str__(self):
+        return self.nome
 
-class Subcategoria(models.Model):
-    categoria = models.ForeignKey(Categoria,
-                                 on_delete=models.CASCADE)
-    nome = models.CharField(max_length=32)
-
-
-class Tag(models.Model):
-    tag = models.CharField(max_length=64,
-                           db_index=True)
+    class MPTTMeta:
+        order_insertion_by = ['nome']
 
 
 class Atividade(models.Model):
@@ -35,9 +43,7 @@ class Atividade(models.Model):
     encontro = models.ForeignKey(Encontro,
                                  null=True,
                                  on_delete=models.CASCADE)
-    subcategoria = models.ForeignKey(Subcategoria,
-                                 on_delete=models.CASCADE)
-    tag = models.ManyToManyField(Tag)
+    categorias = models.ManyToManyField(Categoria)
     rede = models.ForeignKey(Rede,
                              on_delete=models.CASCADE)
     espaco = models.ForeignKey(Espaco,
@@ -56,3 +62,6 @@ class Atividade(models.Model):
     @property
     def categoria(self):
         return self.subcategoria.categoria
+
+    def __repr__(self):
+        return self.titulo
