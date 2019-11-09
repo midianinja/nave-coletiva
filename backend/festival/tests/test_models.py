@@ -1,0 +1,129 @@
+from datetime import date, datetime
+from django.test import TestCase, tag
+from django.core.exceptions import ValidationError
+
+from festival.models import Festival, Encontro, Categoria, Atividade
+from nave.models import Andar, Espaco
+from rede.models import Pessoa
+
+class AtividadeTest(TestCase):
+    def setUp(self):
+        self.festival = Festival.objects.create(nome='Festival Ninja',
+                                                inicio=date(2019, 11, 21),
+                                                fim=date(2019, 11, 24))
+        self.responsavel = Pessoa.objects.create(nome='Responsavel')
+        andar = Andar.objects.create(nivel=1, nome='primeiro andar')
+        self.estudio = Espaco.objects.create(andar=andar,
+                                             nome='sala estudio')
+        self.hackerspace = Espaco.objects.create(andar=andar,
+                                             nome='hackerspace')
+        self.kwargs = dict(
+            festival=self.festival,
+            espaco=self.estudio,
+            responsavel=self.responsavel,
+            )
+
+        Atividade.objects.create(**self.kwargs,
+                                 inicio=datetime(2019, 11, 21, 8),
+                                 fim=datetime(2019, 11, 21, 10),
+                                 titulo='encontro',
+                                 descricao='...')
+
+    def test_pode_haver_conflito_de_horario_em_espacos_diferentes(self):
+        self.kwargs['espaco'] = self.hackerspace
+        Atividade.objects.create(**self.kwargs,
+                                 inicio=datetime(2019, 11, 21, 8),
+                                 fim=datetime(2019, 11, 21, 10),
+                                 titulo='encontro',
+                                 descricao='...')
+
+    def test_horario_exato(self):
+        atividade = Atividade(**self.kwargs,
+                              inicio=datetime(2019, 11, 21, 8),
+                              fim=datetime(2019, 11, 21, 10),
+                              titulo='encontro',
+                              descricao='...')
+        try:
+            atividade.clean()
+        except ValidationError:
+            pass
+        else:
+            self.fail("Não deveria permitir colisão de horários na mesma sala")
+
+    def test_inicio_antes_fim_depois(self):
+        atividade = Atividade(**self.kwargs,
+                              inicio=datetime(2019, 11, 21, 7),
+                              fim=datetime(2019, 11, 21, 11),
+                              titulo='encontro',
+                              descricao='...')
+        try:
+            atividade.clean()
+        except ValidationError:
+            pass
+        else:
+            self.fail("Não deveria permitir colisão de horários na mesma sala")
+
+    def test_inicio_antes_fim_durante(self):
+        atividade = Atividade(**self.kwargs,
+                              inicio=datetime(2019, 11, 21, 7),
+                              fim=datetime(2019, 11, 21, 9),
+                              titulo='encontro',
+                              descricao='...')
+        try:
+            atividade.clean()
+        except ValidationError:
+            pass
+        else:
+            self.fail("Não deveria permitir colisão de horários na mesma sala")
+
+    def test_inicio_durante_fim_depois(self):
+        atividade = Atividade(**self.kwargs,
+                              inicio=datetime(2019, 11, 21, 9),
+                              fim=datetime(2019, 11, 21, 11),
+                              titulo='encontro',
+                              descricao='...')
+        try:
+            atividade.clean()
+        except ValidationError:
+            pass
+        else:
+            self.fail("Não deveria permitir colisão de horários na mesma sala")
+
+    def test_inicio_exato_fim_durante(self):
+        atividade = Atividade(**self.kwargs,
+                              inicio=datetime(2019, 11, 21, 8),
+                              fim=datetime(2019, 11, 21, 9),
+                              titulo='encontro',
+                              descricao='...')
+        try:
+            atividade.clean()
+        except ValidationError:
+            pass
+        else:
+            self.fail("Não deveria permitir colisão de horários na mesma sala")
+
+    def test_inicio_durante_fim_exato(self):
+        atividade = Atividade(**self.kwargs,
+                              inicio=datetime(2019, 11, 21, 9),
+                              fim=datetime(2019, 11, 21, 10),
+                              titulo='encontro',
+                              descricao='...')
+        try:
+            atividade.clean()
+        except ValidationError:
+            pass
+        else:
+            self.fail("Não deveria permitir colisão de horários na mesma sala")
+
+    def test_inicio_durante_fim_durante(self):
+        atividade = Atividade(**self.kwargs,
+                              inicio=datetime(2019, 11, 21, 9, 0),
+                              fim=datetime(2019, 11, 21, 9, 30),
+                              titulo='encontro',
+                              descricao='...')
+        try:
+            atividade.clean()
+        except ValidationError:
+            pass
+        else:
+            self.fail("Não deveria permitir colisão de horários na mesma sala")

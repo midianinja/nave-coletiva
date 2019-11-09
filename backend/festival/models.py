@@ -1,4 +1,6 @@
 from django.db import models
+from django.db.models import Q
+from django.core.exceptions import ValidationError
 from mptt.models import MPTTModel, TreeForeignKey
 
 from nave.models import Espaco
@@ -45,6 +47,7 @@ class Atividade(models.Model):
                                  on_delete=models.CASCADE)
     categorias = models.ManyToManyField(Categoria)
     rede = models.ForeignKey(Rede,
+                             null=True,
                              on_delete=models.CASCADE)
     espaco = models.ForeignKey(Espaco,
                                on_delete=models.CASCADE)
@@ -58,6 +61,24 @@ class Atividade(models.Model):
     fim = models.DateTimeField()
     titulo = models.CharField(max_length=255)
     descricao = models.TextField()
+
+    def clean(self):
+        qs = Atividade.objects.filter(espaco=self.espaco)
+        qs = qs.filter(Q(inicio__lte=self.inicio,
+                         fim__gte=self.inicio) |
+                       Q(inicio__lte=self.fim,
+                         fim__gte=self.fim) |
+                       Q(inicio__lte=self.inicio,
+                         fim__gte=self.fim) |
+                       Q(inicio__gte=self.inicio,
+                         fim__lte=self.fim))
+        if self.id:
+            qs = qs.exclude(id=self.id)
+        if qs.count() > 2:
+            raise ValidationError("Este horário conflita com %d eventos no mesmo espaço" % qs.count())
+        elif qs.count() == 1:
+            raise ValidationError("Este horário conflita com um evento no mesmo espaço")
+
 
     @property
     def categoria(self):
