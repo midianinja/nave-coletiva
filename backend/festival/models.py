@@ -84,5 +84,5 @@ class Atividade(models.Model):
     def categoria(self):
         return self.subcategoria.categoria
 
-    def __repr__(self):
+    def __str__(self):
         return self.titulo
