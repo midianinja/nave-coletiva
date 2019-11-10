@@ -35,7 +35,10 @@ class Categoria(MPTTModel):
                             related_name='children')
 
     def __str__(self):
-        return self.nome
+        if self.parent:
+            return '%s: %s' % (self.parent.nome, self.nome)
+        else:
+            return self.nome
 
     class MPTTMeta:
         order_insertion_by = ['nome']
