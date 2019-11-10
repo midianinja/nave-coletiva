@@ -63,6 +63,9 @@ class Atividade(models.Model):
     descricao = models.TextField()
 
     def clean(self):
+        if self.inicio >= self.fim:
+            raise ValidationError("Horário de início deve ser anterior ao fim")
+
         qs = Atividade.objects.filter(espaco=self.espaco)
         qs = qs.filter(Q(inicio__lte=self.inicio,
                          fim__gte=self.inicio) |

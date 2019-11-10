@@ -6,7 +6,7 @@ from festival.models import Festival, Encontro, Categoria, Atividade
 from nave.models import Andar, Espaco
 from rede.models import Pessoa
 
-class AtividadeTest(TestCase):
+class BaseTest(TestCase):
     def setUp(self):
         self.festival = Festival.objects.create(nome='Festival Ninja',
                                                 inicio=date(2019, 11, 21),
@@ -23,6 +23,9 @@ class AtividadeTest(TestCase):
             responsavel=self.responsavel,
             )
 
+class AtividadeNaoPodeConflitarHorario(BaseTest):
+    def setUp(self):
+        super().setUp()
         Atividade.objects.create(**self.kwargs,
                                  inicio=datetime(2019, 11, 21, 8),
                                  fim=datetime(2019, 11, 21, 10),
@@ -127,3 +130,33 @@ class AtividadeTest(TestCase):
             pass
         else:
             self.fail("Não deveria permitir colisão de horários na mesma sala")
+
+class AtividadeTest(BaseTest):
+    def setUp(self):
+        super().setUp()
+
+    def test_inicio_nao_pode_ser_igual_ao_fim(self):
+        atividade = Atividade(**self.kwargs,
+                              inicio=datetime(2019, 11, 21, 9, 0),
+                              fim=datetime(2019, 11, 21, 9, 0),
+                              titulo='encontro',
+                              descricao='...')
+        try:
+            atividade.clean()
+        except ValidationError:
+            pass
+        else:
+            self.fail("Não deveria permitir horário início igual ao fim")
+
+    def test_inicio_nao_pode_ser_depois_do_fim(self):
+        atividade = Atividade(**self.kwargs,
+                              inicio=datetime(2019, 11, 21, 10, 0),
+                              fim=datetime(2019, 11, 21, 9, 0),
+                              titulo='encontro',
+                              descricao='...')
+        try:
+            atividade.clean()
+        except ValidationError:
+            pass
+        else:
+            self.fail("Não deveria permitir horário início depois do fim")
