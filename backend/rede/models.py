@@ -4,7 +4,7 @@ from utils.models import ModeloComNome
 
 
 class Rede(ModeloComNome):
-    nome = models.CharField(max_length=32)
+    nome = models.CharField(max_length=64)
 
 
 class Pessoa(ModeloComNome):

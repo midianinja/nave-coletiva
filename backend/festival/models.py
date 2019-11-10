@@ -1,7 +1,9 @@
 from django.db import models
 from django.db.models import Q
 from django.core.exceptions import ValidationError
+from django.dispatch import receiver
 from mptt.models import MPTTModel, TreeForeignKey
+from mptt.fields import TreeManyToManyField
 
 from nave.models import Espaco
 from rede.models import Pessoa, Rede
@@ -24,7 +26,7 @@ class Encontro(ModeloComNome):
 
 
 class Categoria(MPTTModel):
-    nome = models.CharField(max_length=32,
+    nome = models.CharField(max_length=64,
                             db_index=True)
     parent = TreeForeignKey('self',
                             on_delete=models.CASCADE,
@@ -45,7 +47,7 @@ class Atividade(models.Model):
     encontro = models.ForeignKey(Encontro,
                                  null=True,
                                  on_delete=models.CASCADE)
-    categorias = models.ManyToManyField(Categoria)
+    categorias = TreeManyToManyField(Categoria)
     rede = models.ForeignKey(Rede,
                              null=True,
                              on_delete=models.CASCADE)
@@ -89,3 +91,9 @@ class Atividade(models.Model):
 
     def __str__(self):
         return self.titulo
+
+
+@receiver(models.signals.post_migrate)
+def rebuild_handler(sender, **kwargs):
+    if sender.name == 'festival':
+        Categoria.objects.rebuild()
