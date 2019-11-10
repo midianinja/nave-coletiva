@@ -39,6 +39,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'corsheaders',
+    'admin_auto_filters',
     'mptt',
     'rest_framework',
     'rede',

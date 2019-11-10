@@ -49,10 +49,12 @@ class Atividade(models.Model):
                                  on_delete=models.CASCADE)
     encontro = models.ForeignKey(Encontro,
                                  null=True,
+                                 blank=True,
                                  on_delete=models.CASCADE)
     categorias = TreeManyToManyField(Categoria)
     rede = models.ForeignKey(Rede,
                              null=True,
+                             blank=True,
                              on_delete=models.CASCADE)
     espaco = models.ForeignKey(Espaco,
                                on_delete=models.CASCADE)

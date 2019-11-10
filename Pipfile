@@ -10,16 +10,12 @@ ipdb = "*"
 [packages]
 django = "*"
 django-restframework = "*"
-redis = "*"
 dj-database-url = "*"
-django-rest-framework = "*"
 django-cors-headers = "*"
-celery = "*"
 psycopg2 = "*"
-requests = "*"
 uwsgi = "*"
-django-nested-admin = "*"
 django-mptt = "*"
+django-admin-autocomplete-filter = {git = "https://github.com/farhan0581/django-admin-autocomplete-filter.git",editable = true}
 
 [requires]
 python_version = "3.7"
