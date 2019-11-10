@@ -125,6 +125,7 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/2.2/howto/static-files/
 
 STATIC_URL = '/static/'
+STATIC_ROOT = os.getenv('STATIC_ROOT', '/home/navecoletiva/static')
 
 from celery.schedules import crontab
 CELERY_BROKER_URL = 'redis://localhost:6379'
