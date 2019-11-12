@@ -13,6 +13,7 @@ class Espaco(ModeloComNome):
     andar = models.ForeignKey(Andar,
                               on_delete=models.CASCADE)
     nome = models.CharField(max_length=32)
+    capacidade = models.IntegerField()
 
     class Meta:
         verbose_name = 'Espaço'

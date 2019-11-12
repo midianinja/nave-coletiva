@@ -44,6 +44,10 @@ class Categoria(MPTTModel):
         order_insertion_by = ['nome']
 
 
+class Tag(ModeloComNome):
+    nome = models.CharField(max_length=32)
+
+
 class Atividade(models.Model):
     festival = models.ForeignKey(Festival,
                                  on_delete=models.CASCADE)
@@ -52,6 +56,9 @@ class Atividade(models.Model):
                                  blank=True,
                                  on_delete=models.CASCADE)
     categorias = TreeManyToManyField(Categoria)
+    tags = models.ManyToManyField(Tag,
+                                  null=True,
+                                  blank=True)
     rede = models.ForeignKey(Rede,
                              null=True,
                              blank=True,
