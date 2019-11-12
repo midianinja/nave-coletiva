@@ -32,7 +32,7 @@ class ConvidadoFilter(AutocompleteFilter):
 class AtividadeAdmin(admin.ModelAdmin):
     list_filter = [EncontroFilter, CategoriasFilter, TagsFilter, RedeFilter, ResponsavelFilter, ConvidadoFilter]
     search_fields = ['titulo', 'descricao']
-    autocomplete_fields = ['categorias', 'tags', 'convidados']
+    autocomplete_fields = ['categorias', 'tags', 'responsavel', 'convidados']
     class Media:
         pass
 
