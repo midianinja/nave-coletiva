@@ -2,6 +2,7 @@ from django.db import models
 from django.db.models import Q
 from django.core.exceptions import ValidationError
 from django.dispatch import receiver
+from django.utils.safestring import mark_safe
 from mptt.models import MPTTModel, TreeForeignKey
 from mptt.fields import TreeManyToManyField
 
@@ -81,20 +82,35 @@ class Atividade(models.Model):
             raise ValidationError("Horário de início deve ser anterior ao fim")
 
         qs = Atividade.objects.filter(espaco=self.espaco)
-        qs = qs.filter(Q(inicio__lte=self.inicio,
-                         fim__gte=self.inicio) |
-                       Q(inicio__lte=self.fim,
-                         fim__gte=self.fim) |
-                       Q(inicio__lte=self.inicio,
-                         fim__gte=self.fim) |
-                       Q(inicio__gte=self.inicio,
-                         fim__lte=self.fim))
+        time_filters = (Q(inicio__lte=self.inicio,
+                          fim__gte=self.inicio) |
+                        Q(inicio__lte=self.fim,
+                          fim__gte=self.fim) |
+                        Q(inicio__lte=self.inicio,
+                          fim__gte=self.fim) |
+                        Q(inicio__gte=self.inicio,
+                          fim__lte=self.fim))
+        qs = qs.filter(time_filters)
         if self.id:
             qs = qs.exclude(id=self.id)
-        if qs.count() > 2:
-            raise ValidationError("Este horário conflita com %d eventos no mesmo espaço" % qs.count())
-        elif qs.count() == 1:
-            raise ValidationError("Este horário conflita com um evento no mesmo espaço")
+        if qs.count() > 0:
+            if qs.count() > 2:
+                msg = "Este horário conflita com %d eventos no mesmo espaço" % qs.count()
+            else:
+                msg = "Este horário conflita com um evento no mesmo espaço"
+            espacos = []
+            for espaco in Espaco.objects.all():
+                qs = Atividade.objects.filter(espaco=espaco).filter(time_filters)
+                if qs.count() == 0:
+                    espacos.append(espaco)
+            if len(espacos) > 0:
+                msg += '<br />Os seguintes espaços estão livres:<ul>'
+                msg += '\n'.join(['<li>%s</li>' % espaco.nome for espaco in espacos])
+                msg += '</ul>'
+            else:
+                msg += '<br />Não há espaços disponíveis neste horário'
+
+            raise ValidationError(mark_safe(msg))
 
 
     @property
