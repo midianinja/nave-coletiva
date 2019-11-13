@@ -51,7 +51,8 @@ class Tag(ModeloComNome):
 
 class Atividade(models.Model):
     pendente = models.BooleanField(default=True)
-    observacoes = models.TextField(blank=True)
+    observacoes = models.TextField(blank=True,
+                                   verbose_name='observações')
     festival = models.ForeignKey(Festival,
                                  on_delete=models.CASCADE)
     encontro = models.ForeignKey(Encontro,
@@ -66,17 +67,20 @@ class Atividade(models.Model):
                              blank=True,
                              on_delete=models.CASCADE)
     espaco = models.ForeignKey(Espaco,
-                               on_delete=models.CASCADE)
+                               on_delete=models.CASCADE,
+                               verbose_name='espaço')
     responsavel = models.ForeignKey(Pessoa,
                                     related_name='responsavel_por',
-                                    on_delete=models.CASCADE)
+                                    on_delete=models.CASCADE,
+                                    verbose_name='responsável')
     convidados = models.ManyToManyField(Pessoa,
                                         related_name='convidado_para')
 
-    inicio = models.DateTimeField()
+    inicio = models.DateTimeField(verbose_name='início')
     fim = models.DateTimeField()
-    titulo = models.CharField(max_length=255)
-    descricao = models.TextField()
+    titulo = models.CharField(max_length=255,
+                              verbose_name='título')
+    descricao = models.TextField(verbose_name='descrição')
 
     def clean(self):
         if self.inicio >= self.fim:
