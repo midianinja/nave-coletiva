@@ -32,9 +32,19 @@ class ConvidadoFilter(AutocompleteFilter):
 class AtividadeAdmin(admin.ModelAdmin):
     form = AtividadeAdminForm
     list_filter = ['pendente', EncontroFilter, CategoriasFilter, TagsFilter, RedeFilter, ResponsavelFilter, ConvidadoFilter]
+    list_display = ['titulo', 'espaco', 'inicio_fmt', 'fim_fmt']
     search_fields = ['titulo', 'descricao']
     autocomplete_fields = ['categorias', 'tags', 'responsavel', 'convidados']
     save_on_top = True
+
+    def inicio_fmt(self, obj):
+        return obj.inicio.strftime("%d/%m %H:%M")
+    def fim_fmt(self, obj):
+        return obj.fim.strftime("%d/%m %H:%M")
+    inicio_fmt.short_description = 'início'
+    fim_fmt.short_description = 'fim'
+    inicio_fmt.admin_order_field = 'inicio'
+    fim_fmt.admin_order_field = 'fim'
 
     class Media:
         pass
