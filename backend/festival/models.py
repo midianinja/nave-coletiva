@@ -67,6 +67,8 @@ class Atividade(models.Model):
                              blank=True,
                              on_delete=models.CASCADE)
     espaco = models.ForeignKey(Espaco,
+                               null=True,
+                               blank=True,
                                on_delete=models.CASCADE,
                                verbose_name='espaço')
     responsavel = models.ForeignKey(Pessoa,
@@ -87,6 +89,9 @@ class Atividade(models.Model):
     descricao = models.TextField(verbose_name='descrição')
 
     def clean(self):
+        if not self.espaco and not self.pendente:
+            raise ValidationError("O evento deve ter espaço, ou ser marcado como pendente")
+
         if not self.pendente and (self.inicio is None or self.fim is None):
             raise ValidationError("O evento deve ter início e fim, ou ser marcado como pendente")
 
