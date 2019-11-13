@@ -134,6 +134,26 @@ class AtividadeNaoPodeConflitarHorario(BaseTest):
         else:
             self.fail("Não deveria permitir colisão de horários na mesma sala")
 
+    def test_regressao_atividade_pode_conflitar_horario_se_nao_tiver_espaco(self):
+        del self.kwargs['espaco']
+        self.kwargs['pendente'] = True
+        atividade = Atividade.objects.create(**self.kwargs,
+                                             inicio=datetime(2019, 11, 21, 9, 0),
+                                             fim=datetime(2019, 11, 21, 9, 30),
+                                             titulo='encontro',
+                                             descricao='...')
+        atividade2 = Atividade.objects.create(**self.kwargs,
+                                              inicio=datetime(2019, 11, 21, 9, 0),
+                                              fim=datetime(2019, 11, 21, 9, 30),
+                                              titulo='encontro',
+                                              descricao='...')
+        try:
+            atividade.clean()
+            atividade2.clean()
+        except ValidationError:
+            self.fail("Deveria permitir colisão de horários quando nao tem espaco")
+
+
 class AtividadeTest(BaseTest):
     def setUp(self):
         super().setUp()

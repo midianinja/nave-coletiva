@@ -101,6 +101,9 @@ class Atividade(models.Model):
         if self.inicio >= self.fim:
             raise ValidationError("Horário de início deve ser anterior ao fim")
 
+        if self.espaco is None:
+            return
+
         qs = Atividade.objects.filter(espaco=self.espaco)
         time_filters = (Q(inicio__lte=self.inicio,
                           fim__gte=self.inicio) |
