@@ -16,6 +16,7 @@ psycopg2 = "*"
 uwsgi = "*"
 django-mptt = "*"
 django-admin-autocomplete-filter = {git = "https://github.com/farhan0581/django-admin-autocomplete-filter.git",editable = true}
+django-admin-numeric-filter = "*"
 
 [requires]
 python_version = "3.7"
