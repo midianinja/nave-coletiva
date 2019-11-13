@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'corsheaders',
     'admin_auto_filters',
+    'admin_numeric_filter',
     'mptt',
     'rest_framework',
     'rede',
