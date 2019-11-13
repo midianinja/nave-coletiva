@@ -11,4 +11,5 @@ class Rede(ModeloComNome):
 class Pessoa(ModeloComNome):
     nome = models.CharField(max_length=255,
                             db_index=True)
-    redes = models.ManyToManyField(Rede)
+    redes = models.ManyToManyField(Rede,
+                                   blank=True)
