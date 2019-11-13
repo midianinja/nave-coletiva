@@ -58,7 +58,6 @@ class Atividade(models.Model):
                                  on_delete=models.CASCADE)
     categorias = TreeManyToManyField(Categoria)
     tags = models.ManyToManyField(Tag,
-                                  null=True,
                                   blank=True)
     rede = models.ForeignKey(Rede,
                              null=True,
