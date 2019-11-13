@@ -50,6 +50,8 @@ class Tag(ModeloComNome):
 
 
 class Atividade(models.Model):
+    pendente = models.BooleanField(default=True)
+    observacoes = models.TextField(blank=True)
     festival = models.ForeignKey(Festival,
                                  on_delete=models.CASCADE)
     encontro = models.ForeignKey(Encontro,

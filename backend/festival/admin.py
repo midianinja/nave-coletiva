@@ -3,7 +3,7 @@ from mptt.admin import DraggableMPTTAdmin
 from admin_auto_filters.filters import AutocompleteFilter
 
 from festival.models import Festival, Encontro, Categoria, Atividade, Tag
-
+from festival.forms import AtividadeAdminForm
 
 class EncontroFilter(AutocompleteFilter):
     title = 'Encontro'
@@ -30,9 +30,12 @@ class ConvidadoFilter(AutocompleteFilter):
     field_name = 'convidados'
 
 class AtividadeAdmin(admin.ModelAdmin):
-    list_filter = [EncontroFilter, CategoriasFilter, TagsFilter, RedeFilter, ResponsavelFilter, ConvidadoFilter]
+    form = AtividadeAdminForm
+    list_filter = ['pendente', EncontroFilter, CategoriasFilter, TagsFilter, RedeFilter, ResponsavelFilter, ConvidadoFilter]
     search_fields = ['titulo', 'descricao']
     autocomplete_fields = ['categorias', 'tags', 'responsavel', 'convidados']
+    save_on_top = True
+
     class Media:
         pass
 
