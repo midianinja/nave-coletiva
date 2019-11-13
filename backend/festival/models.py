@@ -77,13 +77,22 @@ class Atividade(models.Model):
                                         blank=True,
                                         related_name='convidado_para')
 
-    inicio = models.DateTimeField(verbose_name='início')
-    fim = models.DateTimeField()
+    inicio = models.DateTimeField(verbose_name='início',
+                                  null=True,
+                                  blank=True)
+    fim = models.DateTimeField(null=True,
+                               blank=True)
     titulo = models.CharField(max_length=255,
                               verbose_name='título')
     descricao = models.TextField(verbose_name='descrição')
 
     def clean(self):
+        if not self.pendente and (self.inicio is None or self.fim is None):
+            raise ValidationError("O evento deve ter início e fim, ou ser marcado como pendente")
+
+        if self.inicio is None or self.fim is None:
+            return
+
         if self.inicio >= self.fim:
             raise ValidationError("Horário de início deve ser anterior ao fim")
 

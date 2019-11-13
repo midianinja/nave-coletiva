@@ -14,10 +14,13 @@ class BaseTest(TestCase):
         self.responsavel = Pessoa.objects.create(nome='Responsavel')
         andar = Andar.objects.create(nivel=1, nome='primeiro andar')
         self.estudio = Espaco.objects.create(andar=andar,
-                                             nome='sala estudio')
+                                             nome='sala estudio',
+                                             capacidade=10)
         self.hackerspace = Espaco.objects.create(andar=andar,
-                                             nome='hackerspace')
+                                                 nome='hackerspace',
+                                                 capacidade=10)
         self.kwargs = dict(
+            pendente=False,
             festival=self.festival,
             espaco=self.estudio,
             responsavel=self.responsavel,
