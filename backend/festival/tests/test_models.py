@@ -154,6 +154,39 @@ class AtividadeNaoPodeConflitarHorario(BaseTest):
             self.fail("Deveria permitir colisão de horários quando nao tem espaco")
 
 
+class VariasAtividadesNumaSala(AtividadeNaoPodeConflitarHorario):
+    """
+    Quando atividade permite colisao de horario, todas as regras sao mantidas,
+    exceto teste de horário. Por isso a herança de AtividadeNaoPodeConflitarHorario
+    """
+    def setUp(self):
+        super().setUp()
+
+        self.kwargs['coincide_horario'] = True
+
+    def test_horario_exato(self):
+        atividade = Atividade(**self.kwargs,
+                              inicio=datetime(2019, 11, 21, 8),
+                              fim=datetime(2019, 11, 21, 10),
+                              titulo='encontro',
+                              descricao='...')
+        try:
+            atividade.clean()
+        except ValidationError:
+            self.fail("Deveria permitir colisão de horários na mesma sala quando flag de coincide está ligada")
+
+    def test_flag_de_coincidencia_de_horario_afeta_todas_as_atividades(self):
+        atividade = Atividade(**self.kwargs,
+                              inicio=datetime(2019, 11, 21, 8),
+                              fim=datetime(2019, 11, 21, 10),
+                              titulo='encontro',
+                              descricao='...')
+        atividade.clean()
+        atividade.save()
+
+        self.assertEquals(Atividade.objects.filter(coincide_horario=True).count(), 2)
+
+
 class AtividadeTest(BaseTest):
     def setUp(self):
         super().setUp()
