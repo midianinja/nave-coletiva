@@ -120,7 +120,7 @@ class Atividade(models.Model):
         full_qs = qs
         if self.coincide_horario:
             qs = qs.exclude(inicio=self.inicio, fim=self.fim)
-        if qs.count() > 0:
+        if qs.count() > self.espaco.eventos_simultaneos - 1:
             if qs.count() > 2:
                 msg = "Este horário conflita com %d eventos no mesmo espaço" % qs.count()
             else:
