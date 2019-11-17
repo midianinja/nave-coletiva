@@ -25,6 +25,11 @@ class AgendaComponent extends React.Component {
               );})}
           </div>
           <div className="canvas" style={{ width: agenda.width, height: agenda.height }}>
+            <div className="colunas">
+              {agenda.columns.map((style, index) => (
+                  <div className="coluna" style={style} key={index} />
+              ))}
+            </div>
             <div className="container">
               {agenda.horarios.map((horario, index) => {
                 return (

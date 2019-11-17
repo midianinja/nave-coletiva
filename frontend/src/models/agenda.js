@@ -30,9 +30,14 @@ class Agenda {
 
     buildEspacos(espacos) {
         this.width = 1;
+        this.columns = [];
         espacos.forEach((espaco) => {
             espaco.width = espaco.eventos_simultaneos * LARGURA_ATIVIDADE;
             this.width += espaco.width + 1;
+            this.columns.push({
+                width: LARGURA_ATIVIDADE - 1,
+                height: this.height,
+            });
         });
         this.espacos = espacos;
     }
