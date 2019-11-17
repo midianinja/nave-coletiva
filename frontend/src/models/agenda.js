@@ -5,8 +5,9 @@ Date.prototype.copy = function() {
 }
 
 export const LARGURA_ATIVIDADE = 150;
-export const ALTURA_HORA = 150;
+export const ALTURA_HORA = 170;
 export const PRIMEIRA_HORA = 10;
+export const TZ = -3;
 
 class Agenda {
     constructor(espacos, atividades) {
@@ -63,6 +64,8 @@ class Agenda {
     agendas(atividade) {
         const inicio = new Date(atividade.inicio);
         const fim = new Date(atividade.fim);
+        inicio.setHours(inicio.getHours() - TZ);
+        fim.setHours(fim.getHours() - TZ);
         const agendas = [];
         while (inicio.getDate() <= fim.getDate()) {
             let novofim = fim.copy();

@@ -6,7 +6,7 @@ const AtividadeComponent = ({ atividade }) => {
         <div className="atividade">
           <div className="box">
             <h4>{atividade.titulo}</h4>
-            <label>{`das ${atividade.inicio.slice(11, -4)} às ${atividade.fim.slice(11, -4)}`}</label>
+            <label>{`das ${atividade.inicio.slice(16,21)} às ${atividade.fim.slice(16, 21)}`}</label>
           </div>
         </div>
     );
