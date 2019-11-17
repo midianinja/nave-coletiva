@@ -1,7 +1,7 @@
 @import "../../styles/variables";
 
 .festival {
-  height: 220rem;
+  height: 204rem;
 
   &__head {
     padding: 1.6rem;
@@ -44,7 +44,6 @@
     background-color: #FFF;
 
     &--text-finance {
-
       h3 {
         margin: 0;
         width: 50%;
@@ -53,11 +52,12 @@
         text-transform: uppercase;
         line-height: 1.8rem;
         color: #000;
-
+        
         &:first-child {
           color: $primary;
         }
       }
+      padding: 15px 0;
     }
 
     &--btn {
