@@ -8,5 +8,5 @@ class AndarViewSet(viewsets.ModelViewSet):
     serializer_class = AndarSerializer
 
 class EspacoViewSet(viewsets.ModelViewSet):
-    queryset = Espaco.objects.all()
+    queryset = Espaco.objects.exclude(atividade__isnull=True)
     serializer_class = EspacoSerializer
