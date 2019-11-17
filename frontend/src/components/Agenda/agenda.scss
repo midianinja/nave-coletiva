@@ -57,11 +57,11 @@
     .colunas {
       position: absolute;
       top: 0;
-      left: 59px;
+      left: 0;
       bottom: 0;
       right: 0;
       .coluna {
-        border: 1px solid #cccccc;
+	border: 1px solid #cccccc;
         height: 100%;
         float: left;
         z-index: 50;
@@ -73,6 +73,7 @@
       left: 61px;
       .grid-row {
         position: absolute;
+	left: 0;
         border-bottom: 1px solid #cccccc;
       }
       // .grid-row:nth-child(odd) {
@@ -88,19 +89,14 @@
         .atividade-container {
           position: absolute;
           margin: 0;
-          border-bottom: 1px solid #cccccc;
-          border-top: 1px solid #cccccc;
+          border: 1px solid #cccccc;
+          background-color: #f9f9f9;
 
           .atividade {
-             position: absolute;
-             top: 0;
-             right: 0;
-             bottom: 0;
-	     left: 0;
-	     z-index: 100;
-            background-color: white;
+            position: relative;
+	    z-index: 100;
             width: 98%;
-            max-height: 98%;
+            height: 98%;
             .box {
               padding: 10px;
               label {

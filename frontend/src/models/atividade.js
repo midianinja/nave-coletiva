@@ -7,8 +7,7 @@ class Atividade {
         this.atividade.fim = fim.toString();
         this.inicio = inicio;
         this.fim = fim;
-        debugger;
-        this.slots = (fim - inicio) / 3600000 - PRIMEIRA_HORA;
+        this.slots = (fim - inicio) / 3600000;
         this.data = inicio.getDate() + '/11'; // novembro
         this.atividade.slots = this.slots;
         this.espaco = atividade.espaco;

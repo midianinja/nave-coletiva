@@ -16,8 +16,8 @@ class HomePage extends React.Component {
   };
 
   componentDidMount() {
-      //this.props.actions.listaAtividades();
-    this.props.actions.listaEspacos();
+      this.props.actions.listaAtividades();
+      this.props.actions.listaEspacos();
   }
 
   render() {

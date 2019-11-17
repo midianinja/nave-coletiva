@@ -26,7 +26,7 @@ class Agenda {
         this.horarios = Array.from(Array(14).keys()).map(num => ({
             horario: `${num + PRIMEIRA_HORA}:00`,
             height: ALTURA_HORA,
-            top: (num + PRIMEIRA_HORA) * ALTURA_HORA + num + PRIMEIRA_HORA,
+            top: (num) * ALTURA_HORA + num,
         }));
     }
 
