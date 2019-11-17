@@ -209,7 +209,6 @@ class VariasAtividadesNumaSala(BaseTest):
         except ValidationError:
             self.fail("Deveria permitir colisão de horários em colunas diferentes")
 
-    @tag('dev')
     def test_inicio_exato_fim_durante(self):
         atividade = Atividade(**self.kwargs,
                               inicio=datetime(2019, 11, 21, 8),
