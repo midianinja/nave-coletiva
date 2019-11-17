@@ -62,15 +62,20 @@
 
 	.atividade-container {
 	  position: absolute;
-	  margin: 0px;
-	  padding: 0px;
-	    float: left;
+	  margin: 0;
 
 	  .atividade {
+	    position: relative;
+	    margin-left: 10%;
+	    margin-top: 2%;
 	    border: 1px solid blue;
 	    border-radius: 5px;
-	    width: 100%;
-	    height: 100%;
+	    width: 90%;
+	    height: 96%;
+
+	    .box {
+	      padding: 10px;
+	    }
 	  }
 	}
 
