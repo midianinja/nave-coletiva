@@ -1,36 +1,110 @@
 @import "../../styles/variables";
 
-.festival__head {
-  padding: 1.6rem;
+.festival {
+  height: 220rem;
 
-  img {
-    width: 70%;
-  }
-}
+  &__head {
+    padding: 1.6rem;
 
-.festival__program {
-  padding: 0 2rem;
-
-  &--title {
-    margin: 0;
-    padding-bottom: 0.8rem;
-    font-family: "fugue";
-    font-size: 0.9rem;
-    text-transform: uppercase;
-    color: $primary;
+    img {
+      width: 70%;
+    }
   }
 
-  &--text {
-    margin: 0;
-    display: flex;
-    flex-flow: wrap;
-    font-family: "staatliches";
-    font-size: 1.6rem;
-    color: #000;
+  &__program {
+    padding: 0 2rem;
 
-    h3 {
-      margin: 0 0 0.8rem;
+    &--title {
+      margin: 0;
+      padding-bottom: 0.8rem;
+      font-family: "fugue";
+      font-size: 0.9rem;
+      text-transform: uppercase;
+      color: $primary;
+    }
+
+    &--text {
+      margin: 0;
+      display: flex;
+      flex-flow: wrap;
+      font-family: "staatliches";
+      font-size: 1.6rem;
+      color: #000;
+
+      h3 {
+        margin: 0 0 0.8rem;
+        font-weight: normal;
+      }
+    }
+  }
+
+  &__register {
+    margin: 2rem;
+    position: fixed;
+    bottom: 6rem;
+
+    &--text-finance {
+      margin-bottom: 2rem;
+
+      h3 {
+        margin: 0;
+        width: 50%;
+        font-family: "fugue";
+        font-size: 1.6rem;
+        text-transform: uppercase;
+        line-height: 1.8rem;
+        color: #000;
+
+        &:first-child {
+          color: $primary;
+        }
+      }
+    }
+
+    &--btn {
+      padding: 0.4rem 1rem;
+      background-color: $secondary;
+      font-family: "staatliches";
+      font-size: 1.5rem;
+      color: #000;
+    }
+
+    h2 {
+      font-family: "staatliches";
+      font-size: 2rem;
+      color: #000;
       font-weight: normal;
+    }
+
+    p {
+      font-family: "fugue";
+    }
+  }
+
+  &__footer {
+    padding: 0 2rem;
+    bottom: 0;
+    position: fixed;
+    display: flex;
+    align-items: center;
+    background-color: #000;
+    width: 100%;
+    height: 6rem;
+
+    a {
+      display: flex;
+      font-family: "fugue";
+      font-size: 1.5rem;
+      color: #fff;
+
+      img {
+        height: 1rem;
+        padding: 0.2rem 0.3rem 0 0;
+      }
+
+      span {
+        text-decoration: underline #fff;
+      }
     }
   }
 }
