@@ -80,6 +80,7 @@ TEMPLATES = [
     },
 ]
 
+
 WSGI_APPLICATION = 'backend.wsgi.application'
 
 
@@ -123,6 +124,9 @@ LOGGING = {
         'django': {
             'handlers': ['console'],
             'level': 'DEBUG',
+        },
+        'django.utils.autoreload': {
+            'level': 'INFO',
         },
     },
 }
