@@ -1,18 +1,53 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
+import {connect} from 'react-redux';
+import {bindActionCreators} from 'redux';
 
-const HomePage = () => {
-  return (
-    <div>
-      <h1>React Slingshot</h1>
+import EscolheDia from './Agenda/EscolheDia';
+import Agenda from './Agenda/Agenda';
+import * as actions from '../actions/atividades';
 
-      <h2>Get Started</h2>
-      <ol>
-        <li>Review the <Link to="/fuel-savings">demo app</Link></li>
-        <li>Remove the demo and start coding: npm run remove-demo</li>
-      </ol>
-    </div>
-  );
+class HomePage extends React.Component {
+  componentDidMount() {
+    this.props.actions.listaAtividades();
+    this.props.actions.listaEspacos();
+  }
+
+  render() {
+      const { atividades, espacos } = this.props;
+      return (
+          <div>
+            <h1>Festival Ninja</h1>
+            <h2>Programação</h2>
+            <h3>Confira abaixo a programação completa</h3>
+            <EscolheDia/>
+            <Agenda atividades={atividades} espacos={espacos} />
+          </div>
+    );
+  }
 };
 
-export default HomePage;
+HomePage.propTypes = {
+  actions: PropTypes.object.isRequired,
+  atividades: PropTypes.array,
+  espacos: PropTypes.array,
+};
+
+function mapStateToProps(state) {
+  return {
+    atividades: state.agenda.atividades,
+    espacos: state.agenda.espacos,
+  };
+}
+
+function mapDispatchToProps(dispatch) {
+  return {
+    actions: bindActionCreators(actions, dispatch)
+  };
+}
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(HomePage);

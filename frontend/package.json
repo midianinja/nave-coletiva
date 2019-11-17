@@ -22,6 +22,7 @@
     "prebuild": "npm run lint && npm run test && npm run clean-dist",
     "build": "babel-node tools/build.js && npm run open:dist",
     "test": "jest",
+    "test:debug": "node --inspect node_modules/.bin/jest --runInBand",
     "test:CI": "jest",
     "test:cover": "npm run test -- --coverage ",
     "test:cover:CI": "npm run test:CI -- --coverage && cat ./coverage/lcov.info | node_modules/coveralls/bin/coveralls.js",
@@ -34,6 +35,7 @@
   "dependencies": {
     "@hot-loader/react-dom": "16.10.2",
     "connected-react-router": "6.5.2",
+    "debug": "4.1.1",
     "object-assign": "4.1.1",
     "react": "16.11.0",
     "react-dom": "16.11.0",

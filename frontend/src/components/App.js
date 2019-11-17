@@ -19,11 +19,11 @@ class App extends React.Component {
     return (
       <div>
         <div>
-          <NavLink exact to="/" activeStyle={activeStyle}>Home</NavLink>
-          {' | '}
-          <NavLink to="/fuel-savings" activeStyle={activeStyle}>Demo App</NavLink>
-          {' | '}
-          <NavLink to="/about" activeStyle={activeStyle}>About</NavLink>
+          <NavLink exact to="/" activeStyle={activeStyle}>Sobre</NavLink>
+          <NavLink exact to="/" activeStyle={activeStyle}>Inscreva-se</NavLink>
+          <NavLink exact to="/" activeStyle={activeStyle}>Imprensa</NavLink>
+          <NavLink exact to="/" activeStyle={activeStyle}>Programação</NavLink>
+          <NavLink exact to="/" activeStyle={activeStyle}>Financie</NavLink>
         </div>
         <Switch>
           <Route exact path="/" component={HomePage} />
