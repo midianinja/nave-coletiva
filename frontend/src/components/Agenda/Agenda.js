@@ -1,13 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import {connect} from 'react-redux';
-import {bindActionCreators} from 'redux';
 
 import AtividadeComponent from './Atividade';
-import Agenda from '../../models/agenda';
 import './agenda.scss';
-
-import * as actions from '../../actions/atividades';
 
 class AgendaComponent extends React.Component {
     state = {
@@ -61,5 +56,9 @@ class AgendaComponent extends React.Component {
             </div>);
     }
 }
+
+AgendaComponent.propTypes = {
+    agenda: PropTypes.object.isRequired,
+};
 
 export default AgendaComponent;

@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
 const AtividadeComponent = ({ atividade }) => {
     return (
@@ -8,6 +9,10 @@ const AtividadeComponent = ({ atividade }) => {
           </div>
         </div>
     );
+};
+
+AtividadeComponent.propTypes = {
+    atividade: PropTypes.object.isRequired,
 };
 
 export default AtividadeComponent;

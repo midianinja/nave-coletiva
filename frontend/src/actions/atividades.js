@@ -1,6 +1,6 @@
 import * as types from '../constants/actionTypes';
 
-export function listaAtividades(settings) {
+export function listaAtividades() {
   return function (dispatch) {
     fetch('http://admin.festivalninja.org/api/atividades/').then((response) => {
       response.json().then((atividades) => {
@@ -13,7 +13,7 @@ export function listaAtividades(settings) {
   };
 }
 
-export function listaEspacos(settings) {
+export function listaEspacos() {
   return function (dispatch) {
     fetch('http://admin.festivalninja.org/api/espacos/').then((response) => {
       return response.json().then((espacos) => {

@@ -1,6 +1,6 @@
 import { ALTURA_HORA, LARGURA_ATIVIDADE } from './agenda';
 
-export class Atividade {
+class Atividade {
     constructor(atividade, inicio, fim) {
         this.atividade = atividade;
         this.inicio = inicio;

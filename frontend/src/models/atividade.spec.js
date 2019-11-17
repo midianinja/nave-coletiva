@@ -1,4 +1,4 @@
-import { Atividade } from './atividade';
+import Atividade from './atividade';
 
 describe('Atividade', () => {
     it('tem data', () => {
