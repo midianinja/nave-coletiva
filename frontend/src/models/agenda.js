@@ -6,6 +6,7 @@ Date.prototype.copy = function() {
 
 export const LARGURA_ATIVIDADE = 150;
 export const ALTURA_HORA = 150;
+export const PRIMEIRA_HORA = 10;
 
 class Agenda {
     constructor(espacos, atividades) {
@@ -16,15 +17,15 @@ class Agenda {
             '24/11': {},
         };
         this.width = 1;
-        this.height = 24 * (ALTURA_HORA + 1) - 1;
+        this.height = 14 * (ALTURA_HORA + 1) - 1;
         this.buildEspacos(espacos);
         if (espacos.length > 0) {
             this.buildAtividades(atividades);
         }
-        this.horarios = Array.from(Array(24).keys()).map(num => ({
-            horario: num < 10 ? `0${num}:00` : `${num}:00`,
+        this.horarios = Array.from(Array(14).keys()).map(num => ({
+            horario: `${num + PRIMEIRA_HORA}:00`,
             height: ALTURA_HORA,
-            top: num * ALTURA_HORA + num,
+            top: (num + PRIMEIRA_HORA) * ALTURA_HORA + num + PRIMEIRA_HORA,
         }));
     }
 
