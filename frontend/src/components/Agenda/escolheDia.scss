@@ -4,6 +4,9 @@
   height: 5rem;
   width: 100%;
   margin-top: 2rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
   font-family: "fugue";
   text-transform: uppercase;
   background-color: #000;
@@ -23,5 +26,10 @@
 
   span {
     color: $primary;
+  }
+
+  img {
+    height: 1.5rem;
+    padding: 0 2rem;
   }
 }

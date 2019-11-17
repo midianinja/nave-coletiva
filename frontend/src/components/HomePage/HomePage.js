@@ -8,20 +8,21 @@ import Agenda from '../Agenda/Agenda';
 import * as actions from '../../actions/atividades';
 import './homePage.scss';
 import logofestivalninja from '../../img/logofestivalninja.svg';
+import setaVoltar from '../../img/festivalninja-site-voltar.svg';
 
 class HomePage extends React.Component {
-    state = {
-        data: '21/11',
-    }
-    componentDidMount() {
-        this.props.actions.listaAtividades();
-        this.props.actions.listaEspacos();
-    }
+  state = {
+    data: '21/11'
+  };
+  componentDidMount() {
+    this.props.actions.listaAtividades();
+    this.props.actions.listaEspacos();
+  }
 
   render() {
     const { agenda } = this.props;
     return (
-      <div>
+      <div className="festival">
         <header className="festival__head">
           <img src={logofestivalninja} alt="Imagem contendo o nome Festival Ninja" className="" />
         </header>
@@ -36,22 +37,27 @@ class HomePage extends React.Component {
         <EscolheDia />
         <Agenda agenda={agenda} />
 
-        <article>
+        <article className="festival__register">
           <h2>Quer Participar?</h2>
-          <div>
+          <div className="festival__register--text-finance">
             <h3>Garanta sua vaga</h3>
-            <h3>ajudando a financiar o festival</h3>
+            <h3>ajudando a financiar o festival.</h3>
           </div>
-          <a>Garantir vaga</a>
+          <a className="festival__register--btn">Garantir vaga</a>
 
-          <p>Quer participar e não pode contribuir?</p>
-          <p>Preencha o formulário para receber informações sobre as vagas disponíveis.</p>
+          <div>
+            <p>Quer participar e não pode contribuir?</p>
+            <p>Preencha o formulário para receber informações sobre as vagas disponíveis.</p>
+          </div>
 
           <a>Cadastrar</a>
         </article>
 
-        <footer>
-          <a>voltar</a>
+        <footer className="festival__footer">
+          <a>
+            <img src={setaVoltar} alt="icone de seta apontando para o lado esquerdo" />
+            <span>voltar</span>
+          </a>
         </footer>
       </div>
     );
@@ -59,18 +65,18 @@ class HomePage extends React.Component {
 }
 
 HomePage.propTypes = {
-    actions: PropTypes.object.isRequired,
-    agenda: PropTypes.object,
+  actions: PropTypes.object.isRequired,
+  agenda: PropTypes.object
 };
 
 HomePage.defaultProps = {
-    agenda: new Agenda([], []),
+  agenda: new Agenda([], [])
 };
 
 function mapStateToProps(state) {
-    return {
-        agenda: state.agenda.agenda,
-    };
+  return {
+    agenda: state.agenda.agenda
+  };
 }
 
 function mapDispatchToProps(dispatch) {
