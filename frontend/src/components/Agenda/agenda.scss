@@ -17,14 +17,14 @@
       border-left: 0;
       border-right: 0;
       background-color: #FFF;
-      border-left: 0;
+      border-left: 1px solid #cccccc;
       float: left;
       font-family: "fugue";
       padding: 10px 0px;
       text-align: center;
     }
     .espaco-header:first-child {
-      // border-left: 1px solid black;
+      border-left: 0;
     }
   }
   .horarios-header {

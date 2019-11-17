@@ -43,12 +43,12 @@ class EscolheDia extends React.Component {
   render() {
     return (
       <div>
-        <div className="selectday">
+        <div className="selectday" onClick={() => this.setState({ optionsVisible: !this.state.optionsVisible })}>
           <a className="dia">
             <label>{this.state.label}</label>
             <span>{this.state.span}</span>
           </a>
-          <a className="seta" onClick={() => this.setState({ optionsVisible: !this.state.optionsVisible })}>
+          <a className="seta">
             <img src={dropdown} alt="icone de seta apontando para baixo" />
           </a>
 
