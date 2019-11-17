@@ -25,16 +25,16 @@ class ResponsavelFilter(AutocompleteFilter):
     title = 'Responsável'
     field_name = 'responsavel'
 
-class ConvidadoFilter(AutocompleteFilter):
-    title = 'Convidado'
-    field_name = 'convidados'
+class ConvidadeFilter(AutocompleteFilter):
+    title = 'Convidade'
+    field_name = 'convidades'
 
 class AtividadeAdmin(admin.ModelAdmin):
     form = AtividadeAdminForm
-    list_filter = ['pendente', EncontroFilter, CategoriasFilter, TagsFilter, RedeFilter, ResponsavelFilter, ConvidadoFilter]
+    list_filter = ['pendente', EncontroFilter, CategoriasFilter, TagsFilter, RedeFilter, ResponsavelFilter, ConvidadeFilter]
     list_display = ['titulo', 'espaco', 'inicio_fmt', 'fim_fmt', 'coluna']
     search_fields = ['titulo', 'descricao']
-    autocomplete_fields = ['categorias', 'tags', 'responsavel', 'convidados']
+    autocomplete_fields = ['categorias', 'tags', 'responsavel', 'convidades']
     save_on_top = True
 
     def inicio_fmt(self, obj):

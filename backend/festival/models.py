@@ -75,9 +75,9 @@ class Atividade(models.Model):
                                     related_name='responsavel_por',
                                     on_delete=models.CASCADE,
                                     verbose_name='responsável')
-    convidados = models.ManyToManyField(Pessoa,
+    convidades = models.ManyToManyField(Pessoa,
                                         blank=True,
-                                        related_name='convidado_para')
+                                        related_name='convidade_para')
     coluna = models.IntegerField(default=1)
     inicio = models.DateTimeField(verbose_name='início',
                                   null=True,
