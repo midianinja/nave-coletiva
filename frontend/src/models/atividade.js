@@ -9,6 +9,7 @@ class Atividade {
         this.data = inicio.getDate() + '/11'; // novembro
         this.atividade.slots = this.slots;
         this.espaco = atividade.espaco;
+        atividade.ordem = atividade.ordem || 1;
         this.style = {
             height: this.slots * (ALTURA_HORA + 1),
             width: LARGURA_ATIVIDADE,
