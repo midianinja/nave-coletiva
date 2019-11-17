@@ -3,7 +3,7 @@
   width: 100%;
   overflow: auto;
   position: relative;
-  max-height: 90vh;
+  max-height: 70vh;
   .espacos-header {
     position:-webkit-sticky;
     position: sticky;
@@ -31,11 +31,11 @@
     position:-webkit-sticky;
     position: sticky;
     padding-top: 41px;
+    z-index: 40;
     height: 0;
     left: 0;
     border: 0;
     .horario-header {
-      // border: 1px solid black;
       font-family: "fugue";
       border-top: 0;
       border-right: 1px solid #FFF;
@@ -67,18 +67,14 @@
         z-index: 50;
       }
     }
-    // position: absolute;
     .container {
       position: relative;
       left: 61px;
       .grid-row {
         position: absolute;
-	left: 0;
+        left: 0;
         border-bottom: 1px solid #cccccc;
       }
-      // .grid-row:nth-child(odd) {
-
-      // }
       .column {
         position: absolute;
         border: 1px solid #cccccc;
@@ -89,12 +85,11 @@
         .atividade-container {
           position: absolute;
           margin: 0;
-          border: 1px solid #cccccc;
           background-color: #f9f9f9;
 
           .atividade {
             position: relative;
-	    z-index: 100;
+            z-index: 100;
             width: 98%;
             height: 98%;
             .box {
