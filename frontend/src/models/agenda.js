@@ -4,8 +4,8 @@ Date.prototype.copy = function() {
     return new Date(JSON.parse(JSON.stringify(this)));
 }
 
-export const LARGURA_ATIVIDADE = 150;
-export const ALTURA_HORA = 100;
+export const LARGURA_ATIVIDADE = 200;
+export const ALTURA_HORA = 200;
 
 class Agenda {
     constructor(espacos, atividades) {

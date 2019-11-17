@@ -11,7 +11,6 @@ class AgendaComponent extends React.Component {
     console.log("TCL: AgendaComponent -> render -> agenda", agenda)
     console.log("TCL: AgendaComponent -> render -> data", data)
     const atividadesDoDia = agenda.atividades[data];
-    console.log("TCL: AgendaComponent -> render -> atividadesDoDia", atividadesDoDia)
     return (
       <div>
         <div  className='agenda'>
