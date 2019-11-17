@@ -5,7 +5,7 @@ Date.prototype.copy = function() {
 }
 
 export const LARGURA_ATIVIDADE = 150;
-export const ALTURA_HORA = 100;
+export const ALTURA_HORA = 150;
 
 class Agenda {
     constructor(espacos, atividades) {
