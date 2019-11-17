@@ -5,7 +5,7 @@ import {bindActionCreators} from 'redux';
 
 import AtividadeComponent from './Atividade';
 import Agenda from '../../models/agenda';
-import style from './agenda.scss';
+import './agenda.scss';
 
 import * as actions from '../../actions/atividades';
 

@@ -1,7 +1,5 @@
 /* eslint-disable import/no-named-as-default */
-import { NavLink, Route, Switch } from "react-router-dom";
-
-//import 'bootstrap/dist/css/bootstrap.min.css';
+import { NavLink, Route, Switch } from 'react-router-dom';
 
 import Agenda from "./Agenda/Agenda";
 import PropTypes from "prop-types";

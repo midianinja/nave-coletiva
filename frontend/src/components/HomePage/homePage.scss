@@ -1,0 +1,36 @@
+@import "../../styles/variables";
+
+.festival__head {
+  padding: 1.6rem;
+
+  img {
+    width: 70%;
+  }
+}
+
+.festival__program {
+  padding: 0 2rem;
+
+  &--title {
+    margin: 0;
+    padding-bottom: 0.8rem;
+    font-family: "fugue";
+    font-size: 0.9rem;
+    text-transform: uppercase;
+    color: $primary;
+  }
+
+  &--text {
+    margin: 0;
+    display: flex;
+    flex-flow: wrap;
+    font-family: "staatliches";
+    font-size: 1.6rem;
+    color: #000;
+
+    h3 {
+      margin: 0 0 0.8rem;
+      font-weight: normal;
+    }
+  }
+}
