@@ -12,7 +12,7 @@
       background-color: #FFF;
       border-left: 0;
       float: left;
-      height: 40px;
+      font-family: "fugue";
       padding: 10px 0px;
       text-align: center;
     }
@@ -23,11 +23,12 @@
   .horarios-header {
     position:-webkit-sticky;
     position: sticky;
-    padding-top: 61px;
+    padding-top: 41px;
     height: 0;
     border: 0;
     .horario-header {
       border: 1px solid black;
+      font-family: "fugue";
       border-top: 0;
       border-bottom: 1px solid #f5f5f5;
       width: 79px;
@@ -77,15 +78,18 @@
             .box {
               padding: 10px;
               label {
+                font-family: "fugue";
                 font-size: 10px;
               }
               h4 {
+                font-family: "staatliches";
                 color: #907CFF;
                 margin: 0;
                 text-transform: uppercase;
                 font-size: 20px,
               }
               h5 {
+                font-family: "fugue";
                 margin: 0;
                 height: 90px;
                 overflow: hidden;
