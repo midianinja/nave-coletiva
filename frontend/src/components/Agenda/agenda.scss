@@ -39,6 +39,7 @@
         font-weight: bold;
         font-size: 12px;
         line-height: 100%;
+        width: 59px;
       }
     }
   }
@@ -48,18 +49,18 @@
       position: relative;
       left: 61px;
       .coluna {
-	border: 1px solid red;
-	height: 100%;
-	float: left;
-	z-index: 50;
+        border: 1px solid red;
+        height: 100%;
+        float: left;
+        z-index: 50;
       }
       .grid-row {
         position: absolute;
         border-bottom: 1px solid black;
       }
-      .grid-row:nth-child(odd) {
+      // .grid-row:nth-child(odd) {
 
-      }
+      // }
       .column {
         position: absolute;
         border: 1px solid black;
