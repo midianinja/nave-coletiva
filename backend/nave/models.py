@@ -14,6 +14,7 @@ class Espaco(ModeloComNome):
                               on_delete=models.CASCADE)
     nome = models.CharField(max_length=32)
     capacidade = models.IntegerField()
+    eventos_simultaneos = models.IntegerField(default=1)
 
     class Meta:
         verbose_name = 'Espaço'
