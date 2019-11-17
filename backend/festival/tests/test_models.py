@@ -15,7 +15,8 @@ class BaseTest(TestCase):
         andar = Andar.objects.create(nivel=1, nome='primeiro andar')
         self.estudio = Espaco.objects.create(andar=andar,
                                              nome='sala estudio',
-                                             capacidade=10)
+                                             capacidade=10,
+                                             eventos_simultaneos=2)
         self.hackerspace = Espaco.objects.create(andar=andar,
                                                  nome='hackerspace',
                                                  capacidade=10)
@@ -157,13 +158,12 @@ class AtividadeNaoPodeConflitarHorario(BaseTest):
 class VariasAtividadesNumaSala(BaseTest):
     def setUp(self):
         super().setUp()
-        self.estudio.eventos_simultaneos = 2
-        self.kwargs['coincide_horario'] = True
         Atividade.objects.create(**self.kwargs,
                                  inicio=datetime(2019, 11, 21, 8),
                                  fim=datetime(2019, 11, 21, 10),
                                  titulo='encontro',
                                  descricao='...')
+        self.kwargs['coluna'] = 2
 
     def test_horario_exato(self):
         atividade = Atividade(**self.kwargs,
@@ -174,7 +174,7 @@ class VariasAtividadesNumaSala(BaseTest):
         try:
             atividade.clean()
         except ValidationError:
-            self.fail("Não deveria permitir colisão de horários na mesma sala")
+            self.fail("Deveria permitir colisão de horários em colunas diferentes")
 
     def test_inicio_antes_fim_depois(self):
         atividade = Atividade(**self.kwargs,
@@ -185,7 +185,7 @@ class VariasAtividadesNumaSala(BaseTest):
         try:
             atividade.clean()
         except ValidationError:
-            self.fail("Não deveria permitir colisão de horários na mesma sala")
+            self.fail("Deveria permitir colisão de horários em colunas diferentes")
 
     def test_inicio_antes_fim_durante(self):
         atividade = Atividade(**self.kwargs,
@@ -196,7 +196,7 @@ class VariasAtividadesNumaSala(BaseTest):
         try:
             atividade.clean()
         except ValidationError:
-            self.fail("Não deveria permitir colisão de horários na mesma sala")
+            self.fail("Deveria permitir colisão de horários em colunas diferentes")
 
     def test_inicio_durante_fim_depois(self):
         atividade = Atividade(**self.kwargs,
@@ -207,8 +207,9 @@ class VariasAtividadesNumaSala(BaseTest):
         try:
             atividade.clean()
         except ValidationError:
-            self.fail("Não deveria permitir colisão de horários na mesma sala")
+            self.fail("Deveria permitir colisão de horários em colunas diferentes")
 
+    @tag('dev')
     def test_inicio_exato_fim_durante(self):
         atividade = Atividade(**self.kwargs,
                               inicio=datetime(2019, 11, 21, 8),
@@ -218,7 +219,7 @@ class VariasAtividadesNumaSala(BaseTest):
         try:
             atividade.clean()
         except ValidationError:
-            self.fail("Não deveria permitir colisão de horários na mesma sala")
+            self.fail("Deveria permitir colisão de horários em colunas diferentes")
 
     def test_inicio_durante_fim_exato(self):
         atividade = Atividade(**self.kwargs,
@@ -229,7 +230,7 @@ class VariasAtividadesNumaSala(BaseTest):
         try:
             atividade.clean()
         except ValidationError:
-            self.fail("Não deveria permitir colisão de horários na mesma sala")
+            self.fail("Deveria permitir colisão de horários em colunas diferentes")
 
     def test_inicio_durante_fim_durante(self):
         atividade = Atividade(**self.kwargs,
@@ -240,18 +241,7 @@ class VariasAtividadesNumaSala(BaseTest):
         try:
             atividade.clean()
         except ValidationError:
-            self.fail("Não deveria permitir colisão de horários na mesma sala")
-
-    def test_flag_de_coincidencia_de_horario_afeta_todas_as_atividades(self):
-        atividade = Atividade(**self.kwargs,
-                              inicio=datetime(2019, 11, 21, 8),
-                              fim=datetime(2019, 11, 21, 10),
-                              titulo='encontro',
-                              descricao='...')
-        atividade.clean()
-        atividade.save()
-
-        self.assertEquals(Atividade.objects.filter(coincide_horario=True).count(), 2)
+            self.fail("Deveria permitir colisão de horários em colunas diferentes")
 
 
 class AtividadeTest(BaseTest):
@@ -283,3 +273,10 @@ class AtividadeTest(BaseTest):
             pass
         else:
             self.fail("Não deveria permitir horário início depois do fim")
+
+    def test_coluna_nao_pode_ser_maior_que_capacidade_do_espaco(self):
+        atividade = Atividade(**self.kwargs,
+                              fim=datetime(2019, 11, 21, 10, 0),
+                              inicio=datetime(2019, 11, 21, 9, 0),
+                              titulo='encontro',
+                              descricao='...')

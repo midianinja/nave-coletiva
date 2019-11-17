@@ -78,8 +78,7 @@ class Atividade(models.Model):
     convidados = models.ManyToManyField(Pessoa,
                                         blank=True,
                                         related_name='convidado_para')
-    coincide_horario = models.BooleanField(default=False)
-    ordem = models.IntegerField(default=1)
+    coluna = models.IntegerField(default=1)
     inicio = models.DateTimeField(verbose_name='início',
                                   null=True,
                                   blank=True)
@@ -107,7 +106,7 @@ class Atividade(models.Model):
         if self.espaco is None:
             return
 
-        qs = Atividade.objects.filter(espaco=self.espaco)
+        qs = Atividade.objects.filter(espaco=self.espaco, coluna=self.coluna)
         time_filters = (Q(inicio__lte=self.inicio,
                           fim__gte=self.inicio) |
                         Q(inicio__lte=self.fim,
@@ -120,30 +119,9 @@ class Atividade(models.Model):
         if self.id:
             qs = qs.exclude(id=self.id)
 
-        full_qs = qs
-        if self.coincide_horario:
-            qs = qs.exclude(inicio=self.inicio, fim=self.fim)
-        if qs.count() > self.espaco.eventos_simultaneos - 1:
-            if qs.count() > 2:
-                msg = "Este horário conflita com %d eventos no mesmo espaço" % qs.count()
-            else:
-                msg = "Este horário conflita com um evento no mesmo espaço"
-            espacos = []
-            for espaco in Espaco.objects.all():
-                qs = Atividade.objects.filter(espaco=espaco).filter(time_filters)
-                if qs.count() == 0:
-                    espacos.append(espaco)
-            if len(espacos) > 0:
-                msg += '<br />Os seguintes espaços estão livres:<ul>'
-                msg += '\n'.join(['<li>%s</li>' % espaco.nome for espaco in espacos])
-                msg += '</ul>'
-            else:
-                msg += '<br />Não há espaços disponíveis neste horário'
+        if qs.count() > 0:
+            raise ValidationError("Este horário conflita com outro evento no mesmo espaço")
 
-            raise ValidationError(mark_safe(msg))
-
-        if full_qs.count() > 0:
-            full_qs.filter(inicio=self.inicio, fim=self.fim).update(coincide_horario=True)
 
 
     @property

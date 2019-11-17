@@ -32,7 +32,7 @@ class ConvidadoFilter(AutocompleteFilter):
 class AtividadeAdmin(admin.ModelAdmin):
     form = AtividadeAdminForm
     list_filter = ['pendente', EncontroFilter, CategoriasFilter, TagsFilter, RedeFilter, ResponsavelFilter, ConvidadoFilter]
-    list_display = ['titulo', 'espaco', 'inicio_fmt', 'fim_fmt', 'coincide_horario', 'ordem']
+    list_display = ['titulo', 'espaco', 'inicio_fmt', 'fim_fmt', 'coluna']
     search_fields = ['titulo', 'descricao']
     autocomplete_fields = ['categorias', 'tags', 'responsavel', 'convidados']
     save_on_top = True
