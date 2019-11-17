@@ -1,7 +1,5 @@
 import React from 'react';
 
-import style from './atividade.scss';
-
 const AtividadeComponent = ({ atividade }) => {
     return (
         <div className="atividade">
