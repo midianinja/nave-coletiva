@@ -5,7 +5,7 @@ from festival.serializers import (AtividadeSerializer, FestivalSerializer, Encon
 
 
 class AtividadeViewSet(viewsets.ModelViewSet):
-    queryset = Atividade.objects.all()
+    queryset = Atividade.objects.filter(pendente=False)
     serializer_class = AtividadeSerializer
 
 class FestivalViewSet(viewsets.ModelViewSet):

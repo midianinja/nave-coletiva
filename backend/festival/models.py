@@ -78,7 +78,7 @@ class Atividade(models.Model):
     convidados = models.ManyToManyField(Pessoa,
                                         blank=True,
                                         related_name='convidado_para')
-
+    coincide_horario = models.BooleanField(default=False)
     inicio = models.DateTimeField(verbose_name='início',
                                   null=True,
                                   blank=True)
@@ -116,7 +116,11 @@ class Atividade(models.Model):
         qs = qs.filter(time_filters)
         if self.id:
             qs = qs.exclude(id=self.id)
-        if qs.count() > 0:
+
+        full_qs = qs
+        if self.coincide_horario:
+            qs = qs.exclude(inicio=self.inicio, fim=self.fim)
+        if qs.count() > self.espaco.eventos_simultaneos - 1:
             if qs.count() > 2:
                 msg = "Este horário conflita com %d eventos no mesmo espaço" % qs.count()
             else:
@@ -134,6 +138,9 @@ class Atividade(models.Model):
                 msg += '<br />Não há espaços disponíveis neste horário'
 
             raise ValidationError(mark_safe(msg))
+
+        if full_qs.count() > 0:
+            full_qs.filter(inicio=self.inicio, fim=self.fim).update(coincide_horario=True)
 
 
     @property
