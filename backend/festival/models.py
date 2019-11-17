@@ -87,7 +87,9 @@ class Atividade(models.Model):
                                blank=True)
     titulo = models.CharField(max_length=255,
                               verbose_name='título')
-    descricao = models.TextField(verbose_name='descrição')
+    descricao = models.TextField(verbose_name='descrição',
+                                 null=True,
+                                 blank=True)
 
     def clean(self):
         if not self.espaco and not self.pendente:
