@@ -10,7 +10,7 @@
     top: 0;
     padding-left: 60px;
     background-color: #FFF;
-    z-index: 3;
+    z-index: 200;
     .espaco-header {
       border-bottom: 1px solid rgba(0,0,0, 0.7);
       border-top: 0;
@@ -52,26 +52,34 @@
     }
   }
   .canvas {
+    z-index: 100;
+    .colunas {
+      position: absolute;
+      top: 0;
+      left: 59px;
+      bottom: 0;
+      right: 0;
+      .coluna {
+	border: 1px solid #cccccc;
+	height: 100%;
+	float: left;
+	z-index: 50;
+      }
+    }
     // position: absolute;
     .container {
       position: relative;
       left: 61px;
-      .coluna {
-        border: 1px solid red;
-        height: 100%;
-        float: left;
-        z-index: 50;
-      }
       .grid-row {
         position: absolute;
-        border-bottom: 1px solid rgba(0,0,0, 0.7);
+        border-bottom: 1px solid #cccccc;
       }
       // .grid-row:nth-child(odd) {
 
       // }
       .column {
         position: absolute;
-        border: 1px solid black;
+        border: 1px solid #cccccc;
         border-top: 0;
         border-left: 0;
         position: relative;
@@ -81,31 +89,34 @@
           margin: 0;
 
           .atividade {
-            // position: absolute;
-            // top: 5px;
-            right: 5px;
-            bottom: 5px;
-            left: 5px;
-            .box {
-              padding: 10px;
-              label {
-                font-family: "fugue";
-                font-size: 10px;
-              }
-              h4 {
-                font-family: "staatliches";
-                color: #907CFF;
-                margin: 0;
-                text-transform: uppercase;
-                font-size: 20px,
-              }
-              h5 {
-                font-family: "fugue";
-                margin: 0;
-                height: 90px;
-                overflow: hidden;
-              }
-            }
+             position: absolute;
+             top: 0;
+             right: 0;
+             bottom: 0;
+	     left: 0;
+	     z-index: 100;
+	     background-color: white;
+	     border-right: 1px solid #cccccc;
+             .box {
+               padding: 10px;
+               label {
+                 font-family: "fugue";
+                 font-size: 10px;
+               }
+               h4 {
+                 font-family: "staatliches";
+                 color: #907CFF;
+                 margin: 0;
+                 text-transform: uppercase;
+                 font-size: 20px,
+               }
+               h5 {
+                 font-family: "fugue";
+                 margin: 0;
+                 height: 90px;
+                 overflow: hidden;
+               }
+             }
           }
         }
       }

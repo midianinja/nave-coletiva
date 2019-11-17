@@ -14,7 +14,7 @@ class Atividade {
             height: this.slots * (ALTURA_HORA + 1),
             width: LARGURA_ATIVIDADE,
             top: (ALTURA_HORA + 1) * inicio.getHours(),
-            left: LARGURA_ATIVIDADE * (atividade.ordem - 1),
+            left: LARGURA_ATIVIDADE * (atividade.coluna - 1),
         };
     }
 }
