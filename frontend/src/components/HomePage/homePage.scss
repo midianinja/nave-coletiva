@@ -39,12 +39,11 @@
   }
 
   &__register {
-    margin: 2rem;
-    position: fixed;
-    bottom: 6rem;
+    padding: 2rem;
+    margin-top: 30px;
+    background-color: #FFF;
 
     &--text-finance {
-      margin-bottom: 2rem;
 
       h3 {
         margin: 0;
