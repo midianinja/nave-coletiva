@@ -3,7 +3,7 @@ import objectAssign from 'object-assign';
 import initialState from './initialState';
 import Agenda from '../models/agenda';
 
-function agendaReducer(state = initialState.agenda, action) {
+function agendaReducer(state = initialState, action) {
   const newState = objectAssign({}, state);
 
   switch (action.type) {

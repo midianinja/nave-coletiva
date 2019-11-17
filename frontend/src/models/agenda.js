@@ -4,14 +4,16 @@ Date.prototype.copy = function() {
     return new Date(JSON.parse(JSON.stringify(this)));
 }
 
-const LARGURA_ATIVIDADE = 100;
-const ALTURA_HORA = 100;
+export const LARGURA_ATIVIDADE = 150;
+export const ALTURA_HORA = 100;
 
 class Agenda {
     constructor(espacos, atividades) {
-        this.datas = [];
-        this.index = {
-            datas: {},
+        this.atividades = {
+            '21/11': {},
+            '22/11': {},
+            '23/11': {},
+            '24/11': {},
         };
         this.width = 1;
         this.height = 24 * (ALTURA_HORA + 1) - 1;
@@ -41,13 +43,13 @@ class Agenda {
                 return;
             }
             this.agendas(regra).forEach((atividade) => {
-                if (!this.datas[atividade.data]) {
-                    this.datas[atividade.data] = {};
+                if (!this.atividades[atividade.data]) {
+                    this.atividades[atividade.data] = {};
                 }
-                if (!this.datas[atividade.data][atividade.espaco]) {
-                    this.datas[atividade.data][atividade.espaco] = [];
+                if (!this.atividades[atividade.data][atividade.espaco]) {
+                    this.atividades[atividade.data][atividade.espaco] = [];
                 }
-                this.datas[atividade.data][atividade.espaco].push(atividade);
+                this.atividades[atividade.data][atividade.espaco].push(atividade);
             });
         });
     }

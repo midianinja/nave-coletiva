@@ -59,7 +59,21 @@
 	border-left: 0;
 	position: relative;
 	float: left;
-	width: 100px;
+
+	.atividade-container {
+	  position: absolute;
+	  margin: 0px;
+	  padding: 0px;
+	    float: left;
+
+	  .atividade {
+	    border: 1px solid blue;
+	    border-radius: 5px;
+	    width: 100%;
+	    height: 100%;
+	  }
+	}
+
       }
     }
   }

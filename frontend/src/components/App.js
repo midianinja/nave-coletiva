@@ -1,10 +1,9 @@
 /* eslint-disable import/no-named-as-default */
 import { NavLink, Route, Switch } from "react-router-dom";
 
-import AboutPage from "./AboutPage";
-import FuelSavingsPage from "./containers/FuelSavingsPage";
-import HomePage from "./HomePage";
-import NotFoundPage from "./NotFoundPage";
+//import 'bootstrap/dist/css/bootstrap.min.css';
+
+import Agenda from "./Agenda/Agenda";
 import PropTypes from "prop-types";
 import React from "react";
 import { hot } from "react-hot-loader";
@@ -17,21 +16,9 @@ class App extends React.Component {
   render() {
     const activeStyle = { color: 'blue' };
     return (
-      <div>
-        <div>
-          <NavLink exact to="/" activeStyle={activeStyle}>Sobre</NavLink>
-          <NavLink exact to="/" activeStyle={activeStyle}>Inscreva-se</NavLink>
-          <NavLink exact to="/" activeStyle={activeStyle}>Imprensa</NavLink>
-          <NavLink exact to="/" activeStyle={activeStyle}>Programação</NavLink>
-          <NavLink exact to="/" activeStyle={activeStyle}>Financie</NavLink>
-        </div>
         <Switch>
-          <Route exact path="/" component={HomePage} />
-          <Route path="/fuel-savings" component={FuelSavingsPage} />
-          <Route path="/about" component={AboutPage} />
-          <Route component={NotFoundPage} />
+          <Route exact path="/" component={Agenda} />
         </Switch>
-      </div>
     );
   }
 }

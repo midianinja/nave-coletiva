@@ -1,7 +1,7 @@
+import Agenda from '../models/agenda';
+
 export default {
-  agenda: {
     atividades: [],
     espacos: [],
-    agenda: [],
-  },
+    agenda: new Agenda([], []),
 };
