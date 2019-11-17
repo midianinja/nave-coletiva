@@ -1,4 +1,4 @@
-from rest_framework import viewsets
+from utils import viewsets
 from nave.models import Andar, Espaco
 from nave.serializers import AndarSerializer, EspacoSerializer
 

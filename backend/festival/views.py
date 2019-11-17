@@ -1,4 +1,4 @@
-from rest_framework import viewsets
+from utils import viewsets
 from festival.models import (Atividade, Festival, Encontro, Categoria, Tag)
 from festival.serializers import (AtividadeSerializer, FestivalSerializer, EncontroSerializer,
                                   CategoriaSerializer, TagSerializer)

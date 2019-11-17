@@ -1,4 +1,4 @@
-from rest_framework import viewsets
+from utils import viewsets
 from rede.models import Pessoa, Rede
 from rede.serializers import PessoaSerializer, RedeSerializer
 
