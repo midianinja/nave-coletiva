@@ -66,7 +66,7 @@ class Agenda {
                     novofim.setHours(0);
                 }
             }
-            agendas.push(new Atividade(atividade, inicio.copy(), novofim));
+            agendas.push(new Atividade(atividade, inicio.copy(), novofim.copy()));
             inicio.setDate(inicio.getDate() + 1);
             inicio.setHours(0);
         }

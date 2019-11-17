@@ -5,8 +5,6 @@ const AtividadeComponent = ({ atividade }) => {
         <div className="atividade">
           <div className="box">
             <h4>{atividade.titulo}</h4>
-            <p>{atividade.inicio}</p>
-            <p>{atividade.fim}</p>
           </div>
         </div>
     );

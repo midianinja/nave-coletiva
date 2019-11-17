@@ -6,13 +6,13 @@ export class Atividade {
         this.inicio = inicio;
         this.fim = fim;
         this.slots = (fim - inicio) / 3600000;
+        this.data = inicio.getDate() + '/11'; // novembro
         this.atividade.slots = this.slots;
-        this.data = inicio.getDate() + '/11';
         this.espaco = atividade.espaco;
         this.style = {
-            height: this.slots * ALTURA_HORA,
+            height: this.slots * (ALTURA_HORA + 1),
             width: LARGURA_ATIVIDADE,
-            top: (ALTURA_HORA + 1) * (inicio.getHours() + 3), // timezone issues,
+            top: (ALTURA_HORA + 1) * inicio.getHours(),
             left: LARGURA_ATIVIDADE * (atividade.ordem - 1),
         };
     }
