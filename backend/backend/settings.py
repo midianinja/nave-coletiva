@@ -25,7 +25,6 @@ SECRET_KEY = '!vpb1ll$==)3%ebt#gdn6(m=*$5m86oyk(e_m=c59=-ylg0&+n'
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = bool(os.getenv('DEBUG', False))
-API_ENABLED = bool(os.getenv('API_ENABLED', DEBUG))
 
 ALLOWED_HOSTS = os.getenv('ALLOWED_HOSTS', '').split(',')
 

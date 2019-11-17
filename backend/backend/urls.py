@@ -23,7 +23,5 @@ router.register(r'pessoas', rede_views.PessoaViewSet)
 
 urlpatterns = [
     path('admin/', admin.site.urls),
+    path('api/', include(router.urls)),
 ]
-
-if settings.API_ENABLED:
-    urlpatterns.append(path('api/', include(router.urls)))
