@@ -79,6 +79,7 @@ class Atividade(models.Model):
                                         blank=True,
                                         related_name='convidado_para')
     coincide_horario = models.BooleanField(default=False)
+    ordem = models.IntegerField(default=1)
     inicio = models.DateTimeField(verbose_name='início',
                                   null=True,
                                   blank=True)
