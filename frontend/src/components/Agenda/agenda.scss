@@ -1,11 +1,36 @@
 .agenda {
-  .espacos {
-    .espaco {
-      float: left;
-      height: 1000px;
+  position: relative;
+  .espacos-header {
+    position: absolute;
+    top: 0;
+    left: 80px;
+    .espaco-header {
       border: 1px solid black;
-      padding: 10px 20px;
-      border-bottom: 1px solid black;
+      margin: 0 -1px; /* compensa a borda, pro calculo do tamanho da célula */
+      float: left;
+      height: 40px;
+      padding: 10px 0px;
+      text-align: center;
     }
+  }
+  .horarios-header {
+    position: absolute;
+    top:61px;
+    border: 0;
+    .horario-header {
+      border: 1px solid black;
+      padding: 50px 20px 0 20px;
+      height: 80px;
+      width: 38px;
+    }
+  }
+  .grid-row {
+      border: 1px solid black;
+  }
+  .column {
+    border: 1px solid red;
+    position: relative;
+    float: left;
+    width: 100px;
   }
 }

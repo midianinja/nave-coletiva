@@ -14,19 +14,22 @@ class Agenda {
             datas: {},
         };
         this.width = 0;
+        this.height = 24 * ALTURA_HORA;
         this.buildEspacos(espacos);
         if (espacos.length > 0) {
             this.buildAtividades(atividades);
         }
+        this.horarios = Array.from(Array(24).keys()).map(num => ({
+            horario: num < 10 ? `0${num}:00` : `${num}:00`,
+            height: ALTURA_HORA,
+        }));
     }
 
     buildEspacos(espacos) {
         espacos.forEach((espaco) => {
-            debugger;
             espaco.width = espaco.eventos_simultaneos * LARGURA_ATIVIDADE;
             this.width += espaco.width;
         });
-        this.width = 5000;
         this.espacos = espacos;
     }
 
