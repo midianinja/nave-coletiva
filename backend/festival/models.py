@@ -67,6 +67,8 @@ class Atividade(models.Model):
                              blank=True,
                              on_delete=models.CASCADE)
     espaco = models.ForeignKey(Espaco,
+                               null=True,
+                               blank=True,
                                on_delete=models.CASCADE,
                                verbose_name='espaço')
     responsavel = models.ForeignKey(Pessoa,
@@ -74,17 +76,33 @@ class Atividade(models.Model):
                                     on_delete=models.CASCADE,
                                     verbose_name='responsável')
     convidados = models.ManyToManyField(Pessoa,
+                                        blank=True,
                                         related_name='convidado_para')
-
-    inicio = models.DateTimeField(verbose_name='início')
-    fim = models.DateTimeField()
+    coincide_horario = models.BooleanField(default=False)
+    inicio = models.DateTimeField(verbose_name='início',
+                                  null=True,
+                                  blank=True)
+    fim = models.DateTimeField(null=True,
+                               blank=True)
     titulo = models.CharField(max_length=255,
                               verbose_name='título')
     descricao = models.TextField(verbose_name='descrição')
 
     def clean(self):
+        if not self.espaco and not self.pendente:
+            raise ValidationError("O evento deve ter espaço, ou ser marcado como pendente")
+
+        if not self.pendente and (self.inicio is None or self.fim is None):
+            raise ValidationError("O evento deve ter início e fim, ou ser marcado como pendente")
+
+        if self.inicio is None or self.fim is None:
+            return
+
         if self.inicio >= self.fim:
             raise ValidationError("Horário de início deve ser anterior ao fim")
+
+        if self.espaco is None:
+            return
 
         qs = Atividade.objects.filter(espaco=self.espaco)
         time_filters = (Q(inicio__lte=self.inicio,
@@ -98,7 +116,11 @@ class Atividade(models.Model):
         qs = qs.filter(time_filters)
         if self.id:
             qs = qs.exclude(id=self.id)
-        if qs.count() > 0:
+
+        full_qs = qs
+        if self.coincide_horario:
+            qs = qs.exclude(inicio=self.inicio, fim=self.fim)
+        if qs.count() > self.espaco.eventos_simultaneos - 1:
             if qs.count() > 2:
                 msg = "Este horário conflita com %d eventos no mesmo espaço" % qs.count()
             else:
@@ -116,6 +138,9 @@ class Atividade(models.Model):
                 msg += '<br />Não há espaços disponíveis neste horário'
 
             raise ValidationError(mark_safe(msg))
+
+        if full_qs.count() > 0:
+            full_qs.filter(inicio=self.inicio, fim=self.fim).update(coincide_horario=True)
 
 
     @property

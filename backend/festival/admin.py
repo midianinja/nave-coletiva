@@ -38,9 +38,15 @@ class AtividadeAdmin(admin.ModelAdmin):
     save_on_top = True
 
     def inicio_fmt(self, obj):
-        return obj.inicio.strftime("%d/%m %H:%M")
+        try:
+            return obj.inicio.strftime("%d/%m %H:%M")
+        except AttributeError:
+            return '-'
     def fim_fmt(self, obj):
-        return obj.fim.strftime("%d/%m %H:%M")
+        try:
+            return obj.fim.strftime("%d/%m %H:%M")
+        except AttributeError:
+            return '-'
     inicio_fmt.short_description = 'início'
     fim_fmt.short_description = 'fim'
     inicio_fmt.admin_order_field = 'inicio'
