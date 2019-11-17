@@ -4,7 +4,7 @@
     position:-webkit-sticky;
     position: sticky;
     top: 0;
-    padding-left: 80px;
+    padding-left: 60px;
     background-color: #FFF;
     z-index: 3;
     .espaco-header {
@@ -27,35 +27,34 @@
     height: 0;
     border: 0;
     .horario-header {
-      border: 1px solid black;
-      border-top: 0;
-      border-bottom: 1px solid #f5f5f5;
-      width: 79px;
+      width: 59px;
       .horario {
-        padding: 40px 20px 0 20px;
+	padding: 0 0 0 24px;
+	font-family: Fugue;
+	font-style: normal;
+	font-weight: bold;
+	font-size: 12px;
+	line-height: 100%;
       }
-    }
-    .horario-header:nth-child(odd) {
-      background-color: #f5f5f5;
-    }
-    .horario-header:first-child {
-      border-top: 1px solid black;
-    }
-    .horario-header:last-child {
-      border-bottom: 1px solid black;
     }
   }
   .canvas {
     // position: absolute;
     .container {
       position: relative;
-      left: 81px;
+      left: 61px;
+      .coluna {
+	border: 1px solid red;
+	height: 100%;
+	float: left;
+	z-index: 50;
+      }
       .grid-row {
         position: absolute;
-        border-bottom: 1px solid #f5f5f5;
+        border-bottom: 1px solid black;
       }
       .grid-row:nth-child(odd) {
-	      background-color: #f5f5f5;
+
       }
       .column {
         position: absolute;
