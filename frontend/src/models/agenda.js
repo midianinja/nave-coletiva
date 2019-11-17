@@ -17,10 +17,12 @@ class Agenda {
       '23/11': {},
       '24/11': {},
     };
+    this.convidades = {};
     this.width = 1;
     this.height = 14 * (ALTURA_HORA + 1) - 1;
     this.buildEspacos(espacos);
-    if (espacos.length > 0) {
+    this.buildConvidades(convidades);
+    if (espacos.length > 0 && convidades.length > 0) {
       this.buildAtividades(atividades);
     }
     this.horarios = Array.from(Array(14).keys()).map(num => ({
@@ -44,6 +46,12 @@ class Agenda {
     this.espacos = espacos;
   }
 
+  buildConvidades(convidades) {
+    convidades.forEach((convidade) => {
+      this.convidades[convidade.url] = convidade;
+    });
+  }
+
   buildAtividades(atividades) {
     atividades.forEach((regra) => {
       if (!regra.inicio || !regra.fim || !regra.espaco) {
@@ -56,7 +64,7 @@ class Agenda {
         if (!this.atividades[atividade.data][atividade.espaco]) {
           this.atividades[atividade.data][atividade.espaco] = [];
         }
-        this.atividades[atividade.data][atividade.espaco].push(atividade);
+        this.atividades[atividade.data][atividade.espaco].push(JSON.parse(JSON.stringify(atividade)));
       });
     });
   }
@@ -69,7 +77,7 @@ class Agenda {
     const agendas = [];
     while (inicio.getDate() <= fim.getDate()) {
       let novofim = fim.copy();
-      let novoinicio = inicio.copy()
+      let novoinicio = inicio.copy();
       if (inicio.getDate() <= novofim.getDate()) {
         if (novofim.getDate() > inicio.getDate()) {
           novofim.setDate(inicio.getDate()+1);
@@ -79,6 +87,7 @@ class Agenda {
       if (novoinicio.getHours() < PRIMEIRA_HORA) {
         novoinicio.setHours(PRIMEIRA_HORA);
       }
+      atividade.convidades = atividade.convidades.map(url => this.convidades[url]);
       agendas.push(new Atividade(atividade, novoinicio, novofim));
       inicio.setDate(inicio.getDate() + 1);
       inicio.setHours(0);

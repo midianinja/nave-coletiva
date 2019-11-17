@@ -25,3 +25,16 @@ export function listaEspacos() {
     });
   };
 }
+
+export function listaConvidades() {
+  return function(dispatch) {
+    fetch('http://admin.festivalninja.org/api/pessoas/').then((response) => {
+      return response.json().then((convidades) => {
+        return dispatch({
+          type: types.LISTA_CONVIDADES,
+          convidades,
+        });
+      });
+    });
+  };
+}

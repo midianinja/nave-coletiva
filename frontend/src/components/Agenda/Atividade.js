@@ -7,6 +7,8 @@ const AtividadeComponent = ({ atividade }) => {
           <div className="box">
             <h4>{atividade.titulo}</h4>
             <label>{`das ${atividade.inicio.slice(16,21)} às ${atividade.fim.slice(16, 21)}`}</label>
+            {atividade.convidades.map((convidade, index) => { console.log(convidade); return (
+              <h5 className="convidade" key={index}>{convidade.nome}</h5>)})}
           </div>
         </div>
     );
