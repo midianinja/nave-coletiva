@@ -1,0 +1,2 @@
+export const LISTA_ATIVIDADES = 'LISTA_ATIVIDADES';
+export const LISTA_ESPACOS = 'LISTA_ESPACOS';
