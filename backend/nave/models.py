@@ -19,6 +19,7 @@ class Espaco(ModeloComNome):
 
     class Meta:
         verbose_name = 'Espaço'
+        ordering = ['ordem']
 
     def save(self, *args, **kwargs):
         if self.ordem is None:
