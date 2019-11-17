@@ -16,18 +16,20 @@ const AgendaComponent = ({ espacos, atividades }) => {
           <div className='horarios-header'>
             {agenda.horarios.map((horario, index) => {
                 return (
-                    <div className='horario-header' style={{ height: horario.height }} key={index}>{horario.horario}</div>
+                    <div className='horario-header' style={{ height: horario.height }} key={index}><div className="horario">{horario.horario}</div></div>
                 );})}
           </div>
           <div className="canvas" style={{ width: agenda.width, height: agenda.height }}>
-            {agenda.horarios.map((horario, index) => {
-                return (
-                    <div className='grid-row' style={{ width: agenda.width, height: horario.height }} key={index} />
-                );})}
-            {agenda.espacos.map((espaco, index) => {
-                return (
-                    <div className='column' style={{ width: espaco.width, height: agenda.height }} key={index} />
-                );})}
+            <div className="container">
+              {agenda.horarios.map((horario, index) => {
+                  return (
+                      <div className='grid-row' style={{ width: agenda.width, height: horario.height, top: horario.top }} key={index} />
+                  );})}
+              {agenda.espacos.map((espaco, index) => {
+                  return (
+                      <div className='column' style={{ width: espaco.width, height: agenda.height, left: espaco.left }} key={index} ></div>
+                  );})}
+            </div>
           </div>
         </div>
   );

@@ -13,8 +13,8 @@ class Agenda {
         this.index = {
             datas: {},
         };
-        this.width = 0;
-        this.height = 24 * ALTURA_HORA;
+        this.width = 1;
+        this.height = 24 * (ALTURA_HORA + 1) - 1;
         this.buildEspacos(espacos);
         if (espacos.length > 0) {
             this.buildAtividades(atividades);
@@ -22,13 +22,15 @@ class Agenda {
         this.horarios = Array.from(Array(24).keys()).map(num => ({
             horario: num < 10 ? `0${num}:00` : `${num}:00`,
             height: ALTURA_HORA,
+            top: num * ALTURA_HORA + num,
         }));
     }
 
     buildEspacos(espacos) {
+        this.width = 1;
         espacos.forEach((espaco) => {
             espaco.width = espaco.eventos_simultaneos * LARGURA_ATIVIDADE;
-            this.width += espaco.width;
+            this.width += espaco.width + 1;
         });
         this.espacos = espacos;
     }
