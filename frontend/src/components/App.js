@@ -1,7 +1,7 @@
 /* eslint-disable import/no-named-as-default */
 import { NavLink, Route, Switch } from 'react-router-dom';
 
-import Agenda from "./Agenda/Agenda";
+import HomePage from "./HomePage/HomePage"
 import PropTypes from "prop-types";
 import React from "react";
 import { hot } from "react-hot-loader";
@@ -15,7 +15,7 @@ class App extends React.Component {
     const activeStyle = { color: 'blue' };
     return (
         <Switch>
-          <Route exact path="/" component={Agenda} />
+          <Route exact path="/" component={HomePage} />
         </Switch>
     );
   }

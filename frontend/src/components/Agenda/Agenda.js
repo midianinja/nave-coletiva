@@ -14,19 +14,11 @@ class AgendaComponent extends React.Component {
         data: '21/11',
     }
 
-    componentDidMount() {
-        this.props.actions.listaAtividades();
-        this.props.actions.listaEspacos();
-    }
-
     render() {
         const { agenda } = this.props;
         const atividadesDoDia = agenda.atividades[this.state.data];
         return (
             <div>
-              <h1>Festival Ninja</h1>
-              <h2>Programação</h2>
-              <h3>Confira abaixo a programação completa</h3>
               <select id="data" value={this.state.data} onChange={event => this.setState({ data: event.target.value })}>
                 <option value="21/11">21/11</option>
                 <option value="22/11">22/11</option>
@@ -70,28 +62,4 @@ class AgendaComponent extends React.Component {
     }
 }
 
-AgendaComponent.propTypes = {
-    actions: PropTypes.object.isRequired,
-    agenda: PropTypes.object,
-};
-
-AgendaComponent.defaultProps = {
-    agenda: new Agenda([], []),
-};
-
-function mapStateToProps(state) {
-  return {
-      agenda: state.agenda.agenda,
-  };
-}
-
-function mapDispatchToProps(dispatch) {
-  return {
-    actions: bindActionCreators(actions, dispatch)
-  };
-}
-
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(AgendaComponent);
+export default AgendaComponent;
