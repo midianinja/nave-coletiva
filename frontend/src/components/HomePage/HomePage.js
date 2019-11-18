@@ -16,9 +16,9 @@ class HomePage extends React.Component {
   };
 
   componentDidMount() {
-      this.props.actions.listaAtividades();
-      this.props.actions.listaEspacos();
-      this.props.actions.listaConvidades();
+    this.props.actions.listaAtividades();
+    this.props.actions.listaEspacos();
+    this.props.actions.listaConvidades();
   }
 
   render() {
@@ -36,7 +36,7 @@ class HomePage extends React.Component {
             <h3>programação completa</h3>
           </div>
         </section>
-        <EscolheDia onChange={(data ) => this.setState({ data })} />
+        <EscolheDia onChange={data => this.setState({ data })} />
         <Agenda agenda={agenda} data={this.state.data} />
 
         <article className="festival__register">
@@ -47,12 +47,12 @@ class HomePage extends React.Component {
           </div>
           <a className="festival__register--btn">Garantir vaga</a>
 
-          <div>
+          <div className="festival__register--text-infos">
             <p>Quer participar e não pode contribuir?</p>
             <p>Preencha o formulário para receber informações sobre as vagas disponíveis.</p>
           </div>
 
-          <a>Cadastrar</a>
+          <a className="festival__register--link">Cadastrar</a>
         </article>
 
         <footer className="festival__footer">
