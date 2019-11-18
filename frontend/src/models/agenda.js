@@ -38,10 +38,12 @@ class Agenda {
     espacos.forEach((espaco) => {
       espaco.width = espaco.eventos_simultaneos * LARGURA_ATIVIDADE;
       this.width += espaco.width + 1;
-      this.columns.push({
-        width: LARGURA_ATIVIDADE - 1,
-        height: this.height,
-      });
+      for (let i=0; i<espaco.eventos_simultaneos; i++) {
+        this.columns.push({
+          width: LARGURA_ATIVIDADE - 1.6, // 1.6 é um valor experimental pra alinhar as linhas do grid
+          height: this.height,
+        });
+      }
     });
     this.espacos = espacos;
   }
