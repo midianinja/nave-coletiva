@@ -105,7 +105,7 @@ class Atividade(models.Model):
 
         if self.espaco is None:
             return
-
+        return
         qs = Atividade.objects.filter(espaco=self.espaco, coluna=self.coluna)
         time_filters = (Q(inicio__lte=self.inicio,
                           fim__gt=self.inicio) |
