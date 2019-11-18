@@ -4,7 +4,7 @@ from rede.serializers import PessoaSerializer, RedeSerializer
 
 
 class PessoaViewSet(viewsets.ModelViewSet):
-    queryset = Pessoa.objects.all()
+    queryset = Pessoa.objects.exclude(convidade_para__isnull=True)
     serializer_class = PessoaSerializer
 
 class RedeViewSet(viewsets.ModelViewSet):

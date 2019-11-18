@@ -14,9 +14,11 @@ class HomePage extends React.Component {
   state = {
     data: '21/11'
   };
+
   componentDidMount() {
-    this.props.actions.listaAtividades();
-    this.props.actions.listaEspacos();
+      this.props.actions.listaAtividades();
+      this.props.actions.listaEspacos();
+      this.props.actions.listaConvidades();
   }
 
   render() {
@@ -34,8 +36,8 @@ class HomePage extends React.Component {
             <h3>programação completa</h3>
           </div>
         </section>
-        <EscolheDia />
-        <Agenda agenda={agenda} />
+        <EscolheDia onChange={(data ) => this.setState({ data })} />
+        <Agenda agenda={agenda} data={this.state.data} />
 
         <article className="festival__register">
           <h2>Quer Participar?</h2>
