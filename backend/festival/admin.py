@@ -35,7 +35,7 @@ class EspacoFilter(AutocompleteFilter):
 
 class AtividadeAdmin(admin.ModelAdmin):
     form = AtividadeAdminForm
-    list_filter = ['pendente', EncontroFilter, CategoriasFilter, TagsFilter, RedeFilter, ResponsavelFilter, ConvidadeFilter, EspacoFilter]
+    list_filter = ['pendente', EspacoFilter, EncontroFilter, CategoriasFilter, TagsFilter, RedeFilter, ResponsavelFilter, ConvidadeFilter]
     list_display = ['titulo', 'espaco', 'inicio_fmt', 'fim_fmt', 'coluna', 'convidades_list']
     search_fields = ['titulo', 'descricao']
     autocomplete_fields = ['categorias', 'tags', 'responsavel', 'convidades']

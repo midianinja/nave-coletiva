@@ -8,7 +8,7 @@ import Agenda from '../Agenda/Agenda';
 import * as actions from '../../actions/atividades';
 import './homePage.scss';
 import logofestivalninja from '../../img/logofestivalninja.svg';
-import setaVoltar from '../../img/festivalninja-site-voltar.svg';
+//import setaVoltar from '../../img/festivalninja-site-voltar.svg';
 
 class HomePage extends React.Component {
   state = {
@@ -45,22 +45,16 @@ class HomePage extends React.Component {
             <h3>Garanta sua vaga</h3>
             <h3>ajudando a financiar o festival.</h3>
           </div>
-          <a className="festival__register--btn">Garantir vaga</a>
+          <a className="festival__register--btn" href="http://vakinha.com.br/festival-ninja">Garantir vaga</a>
 
           <div className="festival__register--text-infos">
             <p>Quer participar e não pode contribuir?</p>
             <p>Preencha o formulário para receber informações sobre as vagas disponíveis.</p>
           </div>
 
-          <a className="festival__register--link">Cadastrar</a>
+          <a className="festival__register--link" href="https://docs.google.com/forms/d/e/1FAIpQLSeZrere7j1bEmGgYXiiZ_ayOdyX9-cUCGdmzD1hZkCN6e4Ztw/viewform">Cadastrar</a>
         </article>
 
-        <footer className="festival__footer">
-          <a>
-            <img src={setaVoltar} alt="icone de seta apontando para o lado esquerdo" />
-            <span>voltar</span>
-          </a>
-        </footer>
       </div>
     );
   }
