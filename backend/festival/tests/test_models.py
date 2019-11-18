@@ -38,11 +38,33 @@ class AtividadeNaoPodeConflitarHorario(BaseTest):
 
     def test_pode_haver_conflito_de_horario_em_espacos_diferentes(self):
         self.kwargs['espaco'] = self.hackerspace
-        Atividade.objects.create(**self.kwargs,
-                                 inicio=datetime(2019, 11, 21, 8),
-                                 fim=datetime(2019, 11, 21, 10),
-                                 titulo='encontro',
-                                 descricao='...')
+        atividade = Atividade(**self.kwargs,
+                              inicio=datetime(2019, 11, 21, 8),
+                              fim=datetime(2019, 11, 21, 10),
+                              titulo='encontro',
+                              descricao='...')
+        try:
+            atividade.clean()
+        except ValidationError:
+            self.fail("Deveria permitir eventos paralelos em espaços diferentes")
+
+
+    def test_pode_haver_eventos_consecutivos(self):
+        atividade = Atividade(**self.kwargs,
+                              inicio=datetime(2019, 11, 21, 10),
+                              fim=datetime(2019, 11, 21, 11),
+                              titulo='encontro',
+                              descricao='...')
+        atividade2 = Atividade(**self.kwargs,
+                               inicio=datetime(2019, 11, 21, 7),
+                               fim=datetime(2019, 11, 21, 8),
+                               titulo='encontro',
+                               descricao='...')
+        try:
+            atividade.clean()
+            atividade2.clean()
+        except ValidationError:
+            self.fail("Deveria permitir eventos consecutivos")
 
     def test_horario_exato(self):
         atividade = Atividade(**self.kwargs,

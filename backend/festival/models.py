@@ -108,8 +108,8 @@ class Atividade(models.Model):
 
         qs = Atividade.objects.filter(espaco=self.espaco, coluna=self.coluna)
         time_filters = (Q(inicio__lte=self.inicio,
-                          fim__gte=self.inicio) |
-                        Q(inicio__lte=self.fim,
+                          fim__gt=self.inicio) |
+                        Q(inicio__lt=self.fim,
                           fim__gte=self.fim) |
                         Q(inicio__lte=self.inicio,
                           fim__gte=self.fim) |

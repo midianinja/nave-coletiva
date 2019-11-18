@@ -10,8 +10,8 @@ class AtividadeSerializer(serializers.HyperlinkedModelSerializer):
             return 1
         qs = Atividade.objects.filter(espaco=atividade.espaco)
         time_filters = (Q(inicio__lte=atividade.inicio,
-                          fim__gte=atividade.inicio) |
-                        Q(inicio__lte=atividade.fim,
+                          fim__gt=atividade.inicio) |
+                        Q(inicio__lt=atividade.fim,
                           fim__gte=atividade.fim) |
                         Q(inicio__lte=atividade.inicio,
                           fim__gte=atividade.fim) |
