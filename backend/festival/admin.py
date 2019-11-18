@@ -29,13 +29,21 @@ class ConvidadeFilter(AutocompleteFilter):
     title = 'Convidade'
     field_name = 'convidades'
 
+class EspacoFilter(AutocompleteFilter):
+    title = 'Espaço'
+    field_name = 'espaco'
+
 class AtividadeAdmin(admin.ModelAdmin):
     form = AtividadeAdminForm
-    list_filter = ['pendente', EncontroFilter, CategoriasFilter, TagsFilter, RedeFilter, ResponsavelFilter, ConvidadeFilter]
-    list_display = ['titulo', 'espaco', 'inicio_fmt', 'fim_fmt', 'coluna']
+    list_filter = ['pendente', EncontroFilter, CategoriasFilter, TagsFilter, RedeFilter, ResponsavelFilter, ConvidadeFilter, EspacoFilter]
+    list_display = ['titulo', 'espaco', 'inicio_fmt', 'fim_fmt', 'coluna', 'convidades_list']
     search_fields = ['titulo', 'descricao']
     autocomplete_fields = ['categorias', 'tags', 'responsavel', 'convidades']
     save_on_top = True
+
+    def convidades_list(self, obj):
+        return obj.convidades.count()
+    convidades_list.short_description = '# convidades'
 
     def inicio_fmt(self, obj):
         try:
