@@ -5,7 +5,7 @@ from nave.models import Andar, Espaco
 
 @admin.register(Espaco)
 class EspacoAdmin(admin.ModelAdmin):
-    list_display = ['nome', 'andar', 'capacidade']
+    list_display = ['nome', 'andar', 'capacidade', 'colunas']
     search_fields = ['nome']
     list_filter = [
         'andar',

@@ -1,8 +1,10 @@
 import * as types from '../constants/actionTypes';
 
+const ENDPOINT = 'http://admin.festivalninja.org/api';
+
 export function listaAtividades() {
   return function (dispatch) {
-    fetch('http://admin.festivalninja.org/api/atividades/').then((response) => {
+    fetch(`${ENDPOINT}/atividades/`).then((response) => {
       response.json().then((atividades) => {
         dispatch({
           type: types.LISTA_ATIVIDADES,
@@ -15,7 +17,7 @@ export function listaAtividades() {
 
 export function listaEspacos() {
   return function (dispatch) {
-    fetch('http://admin.festivalninja.org/api/espacos/').then((response) => {
+    fetch(`${ENDPOINT}/espacos/`).then((response) => {
       return response.json().then((espacos) => {
         return dispatch({
           type: types.LISTA_ESPACOS,
@@ -28,7 +30,7 @@ export function listaEspacos() {
 
 export function listaConvidades() {
   return function(dispatch) {
-    fetch('http://admin.festivalninja.org/api/pessoas/').then((response) => {
+    fetch(`${ENDPOINT}/pessoas/`).then((response) => {
       return response.json().then((convidades) => {
         return dispatch({
           type: types.LISTA_CONVIDADES,

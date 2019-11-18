@@ -16,7 +16,7 @@ class BaseTest(TestCase):
         self.estudio = Espaco.objects.create(andar=andar,
                                              nome='sala estudio',
                                              capacidade=10,
-                                             eventos_simultaneos=2)
+                                             colunas=2)
         self.hackerspace = Espaco.objects.create(andar=andar,
                                                  nome='hackerspace',
                                                  capacidade=10)

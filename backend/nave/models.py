@@ -15,7 +15,7 @@ class Espaco(ModeloComNome):
     nome = models.CharField(max_length=32)
     ordem = models.IntegerField()
     capacidade = models.IntegerField()
-    eventos_simultaneos = models.IntegerField(default=1)
+    colunas = models.IntegerField(default=1)
 
     class Meta:
         verbose_name = 'Espaço'

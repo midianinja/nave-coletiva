@@ -36,9 +36,9 @@ class Agenda {
     this.width = 1;
     this.columns = [];
     espacos.forEach((espaco) => {
-      espaco.width = espaco.eventos_simultaneos * LARGURA_ATIVIDADE;
+      espaco.width = espaco.colunas * LARGURA_ATIVIDADE;
       this.width += espaco.width + 1;
-      for (let i=0; i<espaco.eventos_simultaneos; i++) {
+      for (let i=0; i<espaco.colunas; i++) {
         this.columns.push({
           width: LARGURA_ATIVIDADE - 1.6, // 1.6 é um valor experimental pra alinhar as linhas do grid
           height: this.height,

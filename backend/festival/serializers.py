@@ -6,7 +6,7 @@ class AtividadeSerializer(serializers.HyperlinkedModelSerializer):
     largura = serializers.SerializerMethodField('calcula_largura')
 
     def calcula_largura(self, atividade):
-        if atividade.espaco.eventos_simultaneos <= 1:
+        if atividade.espaco.colunas <= 1:
             return 1
         qs = Atividade.objects.filter(espaco=atividade.espaco)
         time_filters = (Q(inicio__lte=atividade.inicio,
@@ -20,7 +20,7 @@ class AtividadeSerializer(serializers.HyperlinkedModelSerializer):
         qs = qs.filter(time_filters)
         qs = qs.exclude(id=atividade.id)
         if qs.count() == 0:
-            return atividade.espaco.eventos_simultaneos
+            return atividade.espaco.colunas
         return 1
 
     class Meta:
