@@ -14,7 +14,7 @@ class Atividade {
         atividade.ordem = atividade.ordem || 1;
         this.style = {
             height: this.slots * (ALTURA_HORA + 1),
-            width: LARGURA_ATIVIDADE,
+            width: LARGURA_ATIVIDADE * this.atividade.largura,
             top: (ALTURA_HORA + 1) * (inicio.getHours() - PRIMEIRA_HORA),
             left: LARGURA_ATIVIDADE * (atividade.coluna - 1),
         };
