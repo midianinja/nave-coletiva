@@ -1,8 +1,28 @@
+from django.db.models import Q
 from rest_framework import serializers
 from festival.models import Atividade, Festival, Encontro, Categoria, Tag
 
-
 class AtividadeSerializer(serializers.HyperlinkedModelSerializer):
+    largura = serializers.SerializerMethodField('calcula_largura')
+
+    def calcula_largura(self, atividade):
+        if atividade.espaco.eventos_simultaneos <= 1:
+            return 1
+        qs = Atividade.objects.filter(espaco=atividade.espaco)
+        time_filters = (Q(inicio__lte=atividade.inicio,
+                          fim__gte=atividade.inicio) |
+                        Q(inicio__lte=atividade.fim,
+                          fim__gte=atividade.fim) |
+                        Q(inicio__lte=atividade.inicio,
+                          fim__gte=atividade.fim) |
+                        Q(inicio__gte=atividade.inicio,
+                          fim__lte=atividade.fim))
+        qs = qs.filter(time_filters)
+        qs = qs.exclude(id=atividade.id)
+        if qs.count() == 0:
+            return atividade.espaco.eventos_simultaneos
+        return 1
+
     class Meta:
         model = Atividade
         fields = '__all__'
