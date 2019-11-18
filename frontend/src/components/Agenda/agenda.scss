@@ -10,7 +10,7 @@
     top: 0;
     padding-left: 60px;
     background-color: #FFF;
-    z-index: 200;
+    z-index: 400;
     .espaco-header {
       border-bottom: 1px solid rgba(0,0,0, 0.7);
       border-top: 0;
@@ -35,7 +35,10 @@
     height: 0;
     left: 0;
     border: 0;
+    background-color: #FFF;
+    z-index: 300;
     .horario-header {
+      background-color: #FFF;
       font-family: "fugue";
       border-top: 0;
       border-right: 1px solid #FFF;
