@@ -8,20 +8,27 @@ class AtividadeSerializer(serializers.HyperlinkedModelSerializer):
     def calcula_largura(self, atividade):
         if atividade.espaco.colunas <= 1:
             return 1
-        qs = Atividade.objects.filter(espaco=atividade.espaco)
-        time_filters = (Q(inicio__lte=atividade.inicio,
-                          fim__gt=atividade.inicio) |
-                        Q(inicio__lt=atividade.fim,
-                          fim__gte=atividade.fim) |
-                        Q(inicio__lte=atividade.inicio,
-                          fim__gte=atividade.fim) |
-                        Q(inicio__gte=atividade.inicio,
-                          fim__lte=atividade.fim))
-        qs = qs.filter(time_filters)
-        qs = qs.exclude(id=atividade.id)
-        if qs.count() == 0:
-            return atividade.espaco.colunas
-        return 1
+        largura = 1
+        coluna = atividade.coluna + 1
+        while coluna <= atividade.espaco.colunas:
+            qs = Atividade.objects.filter(espaco=atividade.espaco,
+                                          coluna=coluna)
+            time_filters = (Q(inicio__lte=atividade.inicio,
+                              fim__gt=atividade.inicio) |
+                            Q(inicio__lt=atividade.fim,
+                              fim__gte=atividade.fim) |
+                            Q(inicio__lte=atividade.inicio,
+                              fim__gte=atividade.fim) |
+                            Q(inicio__gte=atividade.inicio,
+                              fim__lte=atividade.fim))
+            qs = qs.filter(time_filters)
+            qs = qs.exclude(id=atividade.id)
+            if qs.count() == 0:
+                largura += 1
+                coluna += 1
+            else:
+                return largura
+        return largura
 
     class Meta:
         model = Atividade
