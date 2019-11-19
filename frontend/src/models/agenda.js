@@ -40,7 +40,7 @@ class Agenda {
       this.width += espaco.width + 1;
       for (let i=0; i<espaco.colunas; i++) {
         this.columns.push({
-          width: LARGURA_ATIVIDADE - 1.6, // 1.6 é um valor experimental pra alinhar as linhas do grid
+          width: LARGURA_ATIVIDADE - 1.45, // 1.6 é um valor experimental pra alinhar as linhas do grid
           height: this.height,
         });
       }
